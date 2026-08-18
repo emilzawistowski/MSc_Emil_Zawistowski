@@ -1,0 +1,15 @@
+numpy
+scipy
+matplotlib
+pandas
+scikit-learn
+mne
+sounddevice
+soundfile
+pyserial
+tqdm
+requests
+sfs
+praat-parselmouth
+jupyterlab
+ipykernel

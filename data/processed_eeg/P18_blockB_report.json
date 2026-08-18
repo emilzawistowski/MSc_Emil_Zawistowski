@@ -1,0 +1,29 @@
+{
+  "participant": "P18",
+  "block": "B",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    0
+  ],
+  "bad_channels": [
+    "T8",
+    "Fp1",
+    "TP10",
+    "FC6",
+    "FT9",
+    "FT10",
+    "F7",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": true,
+  "n_bad_detected_before_truncation": 9,
+  "n_std_before": 300,
+  "n_std_after": 284,
+  "n_std_rejected": 16,
+  "pct_std_rejected": 5.3,
+  "n_dev_before": 100,
+  "n_dev_after": 99,
+  "n_dev_rejected": 1,
+  "pct_dev_rejected": 1.0
+}

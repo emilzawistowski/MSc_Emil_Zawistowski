@@ -1,0 +1,28 @@
+{
+  "participant": "P14",
+  "block": "B",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    0
+  ],
+  "bad_channels": [
+    "Fp1",
+    "FT9",
+    "TP9",
+    "TP10",
+    "FT10",
+    "F8",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 7,
+  "n_std_before": 300,
+  "n_std_after": 296,
+  "n_std_rejected": 4,
+  "pct_std_rejected": 1.3,
+  "n_dev_before": 100,
+  "n_dev_after": 96,
+  "n_dev_rejected": 4,
+  "pct_dev_rejected": 4.0
+}

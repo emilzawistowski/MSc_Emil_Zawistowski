@@ -1,0 +1,21 @@
+{
+  "participant": "P08",
+  "block": "C",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    1,
+    0
+  ],
+  "bad_channels": [
+    "Oz",
+    "Fz",
+    "Cz"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 3,
+  "n_std_before": 500,
+  "n_std_after": 498,
+  "n_std_rejected": 2,
+  "pct_std_rejected": 0.4
+}

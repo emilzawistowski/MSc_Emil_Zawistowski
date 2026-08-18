@@ -1,0 +1,87 @@
+Output directory: /Users/emil/Desktop/MSc_Emil_Zawistowski/experiment/stimuli_pipeline/outputs
+Log will be saved to: experiment/stimuli_pipeline/outputs/targets_report_20260803_100956.txt
+------------------------------------------------------------------------------
+Found .wav files: 540
+
+==============================================================================
+TOP 15 MALE SPEAKERS BY LOWEST MEAN F0 (STABLE VOICE TARGETS)
+Talker     Mean F0   Min F0 Vowels available
+----------------------------------------------------------------------
+m03         96.2       91 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m07         99.0       90 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m30        100.1       92 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m44        104.3       98 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m13        105.6       95 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m02        106.9      101 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m14        109.1      100 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m35        110.3      106 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m27        110.6      103 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m25        113.5      107 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m23        116.0      107 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m06        116.6      112 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m26        117.4      107 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m50        117.8      109 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+m21        119.9      107 ae, ah, aw, eh, ei, er, ih, iy, oa, oo, uh, uw
+
+==========================================================================================
+VOWEL ACOUSTIC STATS FOR MEN (Full-band analysis)
+Vowel  Word        N  F0 mean  F0 min  Vow dur  File dur
+------------------------------------------------------------------------------------------
+ae     had        45    125.8      96    271.6     523.2
+ah     hod        45    126.6      97    260.9     514.6
+aw     hawed      45    125.3      92    274.8     537.2
+eh     head       45    126.9      95    195.6     456.1
+ei     ei         45    129.5      91    267.2     515.6
+er     heard      45    130.6      94    263.5     517.0
+ih     hid        45    135.6     101    192.9     463.0
+iy     heed       45    138.6      96    243.5     536.6
+oa     hoed       45    129.8      94    266.0     528.1
+oo     hood       45    133.3      92    192.9     465.3
+uh     hud        45    129.0      90    194.2     467.8
+uw     who'd      45    143.6     101    236.7     503.3
+
+==========================================================================================
+FOCUS SPEAKERS x FOCUS VOWELS (Ranked by lowest F0 for maximum pitch stability)
+File       Word        F0    F1    F2  Vow(ms)  File(ms) Status       Misid
+------------------------------------------------------------------------------------------
+m07uh      hud         90   651  1176      185       454 FULL-BAND OK 
+m07oo      hood        92   442  1176      197       525 FULL-BAND OK 
+m03er      heard       94   479  1252      368       665 FULL-BAND OK 
+m07oa      hoed        94   515  1126      266       491 FULL-BAND OK 
+m03eh      head        95   559  1695      284       638 FULL-BAND OK 
+m30oa      hoed        95   376   659      301       603 FULL-BAND OK 
+m07er      heard       96   493  1270      272       560 FULL-BAND OK 
+m03iy      heed        96   331  2311      315       670 FULL-BAND OK 
+m03oa      hoed        96   496   863      417       712 FULL-BAND OK 
+m03oo      hood        96   489  1059      275       594 FULL-BAND OK 
+m03uh      hud         96   622  1075      297       643 FULL-BAND OK 
+m30uh      hud         96   560  1118      199       500 FULL-BAND OK 
+m30eh      head        98   565  1805      197       448 FULL-BAND OK 
+m03ih      hid        101   411  1932      262       621 FULL-BAND OK 
+m07iy      heed       101   346  2379      259       568 FULL-BAND OK 
+m03uw      who'd      101   360   953      420       716 FULL-BAND OK 
+m30er      heard      103   430  1294      310       564 FULL-BAND OK 
+m07eh      head       104   571  1926      197       439 FULL-BAND OK 
+m30ih      hid        105   383  2167      178       492 FULL-BAND OK 
+m30uw      who'd      105   313   861      288       557 FULL-BAND OK 
+m30iy      heed       107   307  2405      282       580 FULL-BAND OK 
+m07ih      hid        108   363  2269      190       465 FULL-BAND OK 
+m30oo      hood       109   430  1021      191       510 FULL-BAND OK 
+m07uw      who'd      113   326   997      231       462 FULL-BAND OK 
+
+==========================================================================================
+FINAL SELECTION – speaker m03 (Full-band tokens, ranked by F0)
+Token      Word        F0    F1    F2  Vow(ms)  File(ms) Methodology Note              
+------------------------------------------------------------------------------------------
+m03ei      ei          91   438  2026      353       618 Natural timbre preserved (Full-band)
+m03aw      hawed       93   647   926      355       704 Natural timbre preserved (Full-band)
+m03er      heard       94   479  1252      368       665 Natural timbre preserved (Full-band)
+m03eh      head        95   559  1695      284       638 Natural timbre preserved (Full-band)
+m03iy      heed        96   331  2311      315       670 Natural timbre preserved (Full-band)
+m03oa      hoed        96   496   863      417       712 Natural timbre preserved (Full-band)
+m03oo      hood        96   489  1059      275       594 Natural timbre preserved (Full-band)
+m03uh      hud         96   622  1075      297       643 Natural timbre preserved (Full-band)
+m03ah      hod         97   755  1133      373       655 Natural timbre preserved (Full-band)
+m03ae      had         99   605  1812      344       647 Natural timbre preserved (Full-band)
+m03ih      hid        101   411  1932      262       621 Natural timbre preserved (Full-band)
+m03uw      who'd      101   360   953      420       716 Natural timbre preserved (Full-band)

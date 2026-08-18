@@ -1,0 +1,30 @@
+{
+  "participant": "P20",
+  "block": "B",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    0,
+    2
+  ],
+  "bad_channels": [
+    "Fp2",
+    "FT9",
+    "FT10",
+    "F3",
+    "F7",
+    "T7",
+    "F8",
+    "TP9"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": true,
+  "n_bad_detected_before_truncation": 10,
+  "n_std_before": 300,
+  "n_std_after": 300,
+  "n_std_rejected": 0,
+  "pct_std_rejected": 0.0,
+  "n_dev_before": 100,
+  "n_dev_after": 100,
+  "n_dev_rejected": 0,
+  "pct_dev_rejected": 0.0
+}

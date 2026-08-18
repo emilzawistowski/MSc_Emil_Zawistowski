@@ -1,0 +1,7 @@
+Condition,N_participants,N_trials_mean,N_trials_SD,Amplitude_mean_uV,Amplitude_SD,FAL_mean_ms,FAL_SD_ms
+"MMN_A (Near-deviant, block A)",20,93.0,14.4,0.0653,1.0403,193.33,48.61
+"MMN_B (Far-deviant, block B)",18,85.3,30.6,0.267,0.5841,177.57,37.19
+P3a_A (deviant block A),20,93.0,14.4,-0.2198,0.6235,371.06,53.5
+P3a_B (deviant block B),18,85.3,30.6,0.3567,0.7795,334.44,45.23
+SSA_AC (devA–ctrlC),19,93.0,14.4,0.1832,0.9216,,
+SSA_BC (devB–ctrlC),17,85.3,30.6,0.1301,0.6035,,

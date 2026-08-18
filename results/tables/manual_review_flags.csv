@@ -1,0 +1,12 @@
+participant,block,n_bad_detected_before_truncation,n_bad_interpolated,n_channels_total
+P02,B,9,8,32
+P02,C,10,8,32
+P10,C,9,8,32
+P11,B,9,8,32
+P14,C,10,8,32
+P15,A,10,8,32
+P15,B,11,8,32
+P15,C,11,8,32
+P18,B,9,8,32
+P20,A,13,8,32
+P20,B,10,8,32

@@ -1,0 +1,78 @@
+======================================================================
+RESULTS IN IEEE FORMAT – ready for the Results section
+======================================================================
+
+HYPOTHESIS H1: MMN Significance (block A – Near-deviant; block B – Far-deviant)
+----------------------------------------------------------------------
+--- MMN_A (Near-deviant, block A) ---
+Descriptive Statistics: N = 20, M = 0.065 µV, SD = 1.040 µV
+Inferential Statistics: t(19.0) = 0.281, p = 0.609
+Effect Size & Bayes Factor: Cohen's d = 0.063, BF10 = 0.17
+95% Confidence Interval: [-0.422, 0.552]
+Note: One-sided hypothesis (alternative='less'); BF10 threshold = 3.0
+
+--- MMN_B (Far-deviant, block B) ---
+Descriptive Statistics: N = 18, M = 0.267 µV, SD = 0.584 µV
+Inferential Statistics: t(17.0) = 1.939, p = 0.965
+Effect Size & Bayes Factor: Cohen's d = 0.457, BF10 = 0.15
+95% Confidence Interval: [-0.023, 0.557]
+Note: One-sided hypothesis (alternative='less'); BF10 threshold = 3.0
+
+
+HYPOTHESIS H2: Looming asymmetry – MMN_A vs MMN_B comparison (DIRECTIONAL)
+----------------------------------------------------------------------
+--- H2 – MMN_A vs MMN_B Amplitude (Fz) ---
+Descriptive Statistics: N = 18, M = -0.346 µV, SD = 0.909 µV
+Inferential Statistics: t(17.0) = -1.404, p = 0.089
+Effect Size & Bayes Factor: Cohen's d = -0.331, BF10 = 0.16
+95% Confidence Interval: [-0.865, 0.174]
+Note: MMN_A: M = -0.079 µV, SD = 0.909; MMN_B: M = 0.267 µV, SD = 0.584. DIRECTIONAL test: A < B (more negative for looming).
+
+--- H2 – MMN_A vs MMN_B FAL (Fz) ---
+Descriptive Statistics: N = 13, M = 16.462 ms, SD = 54.022 ms
+Inferential Statistics: t(12.0) = 1.130, p = 0.860
+Effect Size & Bayes Factor: Cohen's d = 0.313, BF10 = 0.19
+95% Confidence Interval: [-15.278, 48.201]
+Note: FAL_A: M = 193.2 ms, SD = 54.0; FAL_B: M = 176.8 ms, SD = 38.6. DIRECTIONAL test: A < B (shorter latency for looming).
+
+
+HYPOTHESIS H3: P3a Significance
+----------------------------------------------------------------------
+--- P3a_A (deviant block A) ---
+Descriptive Statistics: N = 20, M = -0.220 µV, SD = 0.624 µV
+Inferential Statistics: t(19.0) = -1.576, p = 0.934
+Effect Size & Bayes Factor: Cohen's d = -0.352, BF10 = 0.15
+95% Confidence Interval: [-0.512, 0.072]
+Note: One-sided hypothesis (alternative='greater', expected positive P3a amplitude)
+
+--- P3a_B (deviant block B) ---
+Descriptive Statistics: N = 18, M = 0.357 µV, SD = 0.779 µV
+Inferential Statistics: t(17.0) = 1.941, p = 0.034
+Effect Size & Bayes Factor: Cohen's d = 0.458, BF10 = 0.15
+95% Confidence Interval: [-0.031, 0.744]
+Note: One-sided hypothesis (alternative='greater', expected positive P3a amplitude)
+
+
+SSA CONTROL (deviant vs Block C) – confirmatory test
+----------------------------------------------------------------------
+--- SSA_AC (dev_A – ctrl_C) ---
+Descriptive Statistics: N = 19, M = 0.183 µV, SD = 0.922 µV
+Inferential Statistics: t(18.0) = 0.866, p = 0.801
+Effect Size & Bayes Factor: Cohen's d = 0.199, BF10 = 0.17
+95% Confidence Interval: [-0.261, 0.627]
+Note: One-sided hypothesis (alternative='less'): expected negative amplitude (deviant more negative than control). BF10 threshold = 3.0
+
+--- SSA_BC (dev_B – ctrl_C) ---
+Descriptive Statistics: N = 17, M = 0.130 µV, SD = 0.603 µV
+Inferential Statistics: t(16.0) = 0.889, p = 0.806
+Effect Size & Bayes Factor: Cohen's d = 0.216, BF10 = 0.18
+95% Confidence Interval: [-0.180, 0.440]
+Note: One-sided hypothesis (alternative='less'): expected negative amplitude (deviant more negative than control). BF10 threshold = 3.0
+
+
+======================================================================
+INTERPRETATION NOTES:
+  • BF10 > 3.0 → moderate evidence.
+  • Bayesian tests use a Cauchy prior with scale r = 0.5, as pre-registered.
+  • MMN results for Fz electrode, P3a for Cz (FCz unavailable in montage).
+======================================================================

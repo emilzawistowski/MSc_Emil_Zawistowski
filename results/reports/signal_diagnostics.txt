@@ -1,0 +1,75 @@
+==============================================================================
+  SIGNAL DIAGNOSTICS - SUMMARY REPORT
+==============================================================================
+
+--- SIGNAL QUALITY ---
+Files with visible 50 Hz peak (ratio > 4x background): 0 / 95
+
+Files with channels STILL outlying AFTER preprocessing: 48 / 95
+  -> P01 block A [std]: FT10
+  -> P01 block A [dev]: FT10
+  -> P01 block B [std]: FT9;TP9;TP10;T8;FT10
+  -> P01 block B [dev]: FT9;TP9;TP10;T8;FT10;F8
+  -> P01 block C [std]: FT9;T8;F8
+  -> P02 block A [std]: FT10
+  -> P02 block A [dev]: FT10
+  -> P03 block A [dev]: Fp1;Fp2
+  -> P03 block A [std]: Fp1;Fp2
+  -> P03 block B [dev]: Fp1;Fp2
+  -> P03 block B [std]: Fp1;Fp2
+  -> P03 block C [std]: Fp1;Fp2
+  -> P05 block A [dev]: FT9;TP10;FT10
+  -> P05 block A [std]: FT9;FT10
+  -> P07 block A [std]: F8
+  -> P07 block B [std]: FT10;F8
+  -> P07 block B [dev]: FT9;FT10;F8
+  -> P07 block C [std]: F7;FT9;T7
+  -> P09 block B [std]: F7;FT9;FT10;F8
+  -> P09 block B [dev]: F7;FT9;FC5;T8;FT10;FC6;F8
+  -> P10 block B [dev]: FT9
+  -> P10 block B [std]: FT9;FT10
+  -> P11 block A [dev]: FT9
+  -> P13 block A [dev]: FT9;Cz;FT10
+  -> P13 block A [std]: FT9;Cz;FT10
+  -> P13 block B [dev]: Cz
+  -> P13 block B [std]: FT9;Cz
+  -> P13 block C [std]: Cz;C4
+  -> P14 block A [std]: TP9;F8
+  -> P14 block A [dev]: F7
+  -> P14 block B [std]: FT9
+  -> P14 block B [dev]: F7;FT9
+  -> P14 block C [std]: FT9;TP10;FT10
+  -> P15 block A [dev]: FT9;FT10
+  -> P15 block A [std]: FT9;FT10
+  -> P15 block B [dev]: FT10
+  -> P15 block B [std]: FT10
+  -> P15 block C [std]: FT9
+  -> P17 block B [std]: FT9;FC5;TP9
+  -> P17 block B [dev]: FT9;FC5;TP9
+  -> P18 block B [dev]: FT10
+  -> P18 block B [std]: FT10;F8
+  -> P19 block B [std]: O1
+  -> P19 block B [dev]: O1
+  -> P20 block A [dev]: Fp1;Fz;Fp2
+  -> P20 block A [std]: Fp1;Fz;Fp2
+  -> P20 block B [dev]: Fz;FT9;T8;FT10
+  -> P20 block B [std]: Fz;FT9
+
+Files with >30% rejected epochs: 6 / 95
+  -> P03 block A [dev]: 33.0% rejected
+  -> P15 block A [dev]: 59.0% rejected
+  -> P15 block A [std]: 56.3% rejected
+  -> P15 block C [std]: 42.4% rejected
+  -> P17 block B [std]: 35.3% rejected
+  -> P17 block B [dev]: 38.0% rejected
+
+--- ERP: POLARITY AND SNR ---
+MMN negative (convention‑compliant): 19 / 38
+MMN positive (UNUSUAL):               19 / 38
+Binomial test vs 50/50 (whether deviation from chance is significant): p = 1.000
+
+  >> Deviation from 50/50 is NOT statistically significant (p=1.00). This is consistent with the hypothesis that the true MMN effect is close to zero/noise in this sample (consistent with BF10<1 from 03_statistics.py), and NOT a systematic polarity error. Individual blocks with positive MMN below are worth reviewing per participant, but they do not indicate a pipeline‑wide mistake.
+
+Blocks with low SNR for MMN (<1.0): 10 / 38
+
+==============================================================================

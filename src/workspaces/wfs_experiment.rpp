@@ -1,0 +1,1467 @@
+<REAPER_PROJECT 0.1 "7.72/win64" 1786436842 0
+  <NOTES 0 2
+  >
+  RIPPLE 0 0
+  GROUPOVERRIDE 0 0 0 0
+  AUTOXFADE 128
+  ENVATTACH 3
+  POOLEDENVATTACH 0
+  TCPUIFLAGS 0
+  MIXERUIFLAGS 11 48
+  ENVFADESZ10 40
+  PEAKGAIN 1
+  FEEDBACK 0
+  PANLAW 1
+  PROJOFFS 0 0 0
+  MAXPROJLEN 0 0
+  GRID 3199 8 1 8 1 0 0 0
+  TIMEMODE 1 5 -1 30 0 0 -1 0
+  VIDEO_CONFIG 0 0 65792
+  PANMODE 3
+  PANLAWFLAGS 3
+  CURSOR 0
+  ZOOM 3.72995797655048 0 0
+  VZOOMEX 6 0
+  USE_REC_CFG 0
+  RECMODE 1
+  SMPTESYNC 0 30 100 40 1000 300 0 0 1 0 0
+  LOOP 0
+  LOOPGRAN 0 4
+  RECORD_PATH "Media" ""
+  <RECORD_CFG
+    ZXZhdxgAAQ==
+  >
+  <APPLYFX_CFG
+  >
+  RENDER_FILE ""
+  RENDER_PATTERN ""
+  RENDER_FMT 0 2 0
+  RENDER_1X 0
+  RENDER_RANGE 1 0 0 0 1000
+  RENDER_RESAMPLE 3 0 1
+  RENDER_ADDTOPROJ 0
+  RENDER_STEMS 0
+  RENDER_DITHER 0
+  RENDER_TRIM 0.000001 0.000001 0 0
+  TIMELOCKMODE 0
+  TEMPOENVLOCKMODE 0
+  ITEMMIX 1
+  DEFPITCHMODE 589824 0
+  MISCOPTS 1
+  TAKELANE 1
+  SAMPLERATE 48000 0 0
+  <RENDER_CFG
+    ZXZhdxgAAQ==
+  >
+  LOCK 1
+  <METRONOME 6 2
+    VOL 0.25 0.125
+    BEATLEN 4
+    FREQ 1760 880 1
+    SAMPLES "" "" "" ""
+    SPLIGNORE 0 0
+    SPLDEF 2 660 "" 0 ""
+    SPLDEF 3 440 "" 0 ""
+    PATTERN 0 169
+    PATTERNSTR ABBB
+    MULT 1
+  >
+  GLOBAL_AUTO -1
+  TEMPO 120 4 4 0
+  PLAYRATE 1 0 0.25 4
+  SELECTION 92 92
+  SELECTION2 92 92
+  MASTERAUTOMODE 0
+  MASTERTRACKHEIGHT 0 0
+  MASTERPEAKCOL 16576
+  MASTERMUTESOLO 0
+  MASTERTRACKVIEW 0 0.6667 0.5 0.5 0 0 0 0 0 0 0 0 0 0 1
+  MASTERHWOUT 0 0 1 0 0 0 0 -1
+  MASTERHWOUT 0 0 1 0 0 0 0 -1
+  MASTER_NCH 2 2
+  MASTER_VOLUME 0 0 -1 -1 1
+  MASTER_PANMODE 3
+  MASTER_PANLAWFLAGS 3
+  MASTER_FX 1
+  MASTER_SEL 0
+  <MASTERPLAYSPEEDENV
+    EGUID {28CD3D98-DA9A-4828-A7E2-0F6FA298DC06}
+    ACT 0 -1
+    VIS 0 1 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 0 -1 -1
+  >
+  <TEMPOENVEX
+    EGUID {4DB1F77C-E752-42B6-9257-1FDBEDDE3DE0}
+    ACT 0 -1
+    VIS 1 0 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 1 -1 -1
+  >
+  RULERHEIGHT 86 86
+  RULERLANE 1 4 "" 0 -1 0
+  RULERLANE 2 8 "" 0 -1 0
+  <PROJBAY
+  >
+  <TRACK {5C75D8E3-AA4E-4C52-816E-562B60E0D8E3}
+    NAME Block_A
+    PEAKCOL 17296124
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30549211132155 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 0 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {5C75D8E3-AA4E-4C52-816E-562B60E0D8E3}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 464.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {6C3FD673-3EB9-4A8E-B42D-ACF2A773055A}
+      IID 6
+      NAME block_A_Far_standard_Near_deviant.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {79F4726D-AFBC-4E1D-94CE-C5F9726DCB05}
+      <SOURCE WAVE
+        FILE "Media\block_A_Far_standard_Near_deviant.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\rendered_blocks\block_A_Far_standard_Near_deviant.wav
+      >
+    >
+  >
+  <TRACK {D406D7A4-A2E3-4F9F-B25C-5076330E8FC7}
+    NAME Block_B
+    PEAKCOL 17296124
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30701527295625 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {D406D7A4-A2E3-4F9F-B25C-5076330E8FC7}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 464.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {228AC878-C092-4DCE-AFC5-418802EFD282}
+      IID 7
+      NAME block_B_Near_standard_Far_deviant.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {17600A0E-13CC-41B6-935F-404D0275074B}
+      <SOURCE WAVE
+        FILE "Media\block_B_Near_standard_Far_deviant.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\rendered_blocks\block_B_Near_standard_Far_deviant.wav
+      >
+    >
+  >
+  <TRACK {64478F00-F47D-4724-9844-6DEAF454BD26}
+    NAME Block_C
+    PEAKCOL 17296124
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {64478F00-F47D-4724-9844-6DEAF454BD26}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 464.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {E695184F-BEAA-4750-ABA6-066422DFD355}
+      IID 8
+      NAME block_C_Many_standards_control.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {C42ED5D7-9978-482B-B47F-E9396E1E6724}
+      <SOURCE WAVE
+        FILE "Media\block_C_Many_standards_control.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\rendered_blocks\block_C_Many_standards_control.wav
+      >
+    >
+  >
+  <TRACK {63A92838-7823-4625-BE5E-3895DCD1174B}
+    NAME lower_volume_test
+    PEAKCOL 23068558
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.03860935374665 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 26 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {63A92838-7823-4625-BE5E-3895DCD1174B}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 464.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {06AFD49C-74D4-438D-9112-48EBCCDAB86D}
+      IID 8
+      NAME block_C_Many_standards_control.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {CDB2C65F-F0AF-412A-B814-59EFD87B82A0}
+      <SOURCE WAVE
+        FILE "Media\block_C_Many_standards_control.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\rendered_blocks\block_C_Many_standards_control.wav
+      >
+    >
+  >
+  <TRACK {1328186B-FDDB-4C4B-9FA4-25C82E8D116F}
+    NAME speaker_test
+    PEAKCOL 0
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.07693020882107 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 26 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {1328186B-FDDB-4C4B-9FA4-25C82E8D116F}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 8
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {9290D742-FFEC-48A9-B932-2B5C6BA0A051}
+      IID 23
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {14EA59E2-34BD-48AE-B600-05EEDE9BCA57}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+    <ITEM
+      POSITION 44
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {104350ED-AD8E-4E9F-9FDD-7FB266C355FF}
+      IID 26
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {7DE386ED-9743-4D46-B313-866F22D22DFA}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+    <ITEM
+      POSITION 80
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {67FC8C3F-6250-44B5-8785-21D258FEDB44}
+      IID 27
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {461C194D-15F1-4727-A46F-901AA315BDCC}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+    <ITEM
+      POSITION 116
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {4121B07C-5FD3-4D9A-9D5A-F5DE24023107}
+      IID 28
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {49ED3356-BE93-4F57-A0DA-3700ED51EC6B}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+    <ITEM
+      POSITION 152
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {89736199-14F5-4474-A8E9-E5F755A075B6}
+      IID 29
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {7A933CB9-9BCD-4B30-8AF2-AF7D815B7D82}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+    <ITEM
+      POSITION 188
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {6708E4C7-A6B9-4352-BB93-65C00065619C}
+      IID 30
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {B325F9E7-6106-4A0C-8F69-48C352F1DC47}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+    <ITEM
+      POSITION 224
+      SNAPOFFS 0
+      LENGTH 36
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {4788B8D2-2EEE-4B2D-94BA-C620ABF3B5D7}
+      IID 31
+      NAME wfs_speaker_diagnostic-imported-001.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {03304139-1FF1-4456-AB15-FA1C71AC749B}
+      <SOURCE WAVE
+        FILE "Media\wfs_speaker_diagnostic-imported-001.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\wfs_speaker_diagnostic.wav
+      >
+    >
+  >
+  <TRACK {B421BBDD-065D-4771-B87C-6BA77082A368}
+    NAME calib
+    PEAKCOL 29201262
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.26529707233193 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {B421BBDD-065D-4771-B87C-6BA77082A368}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 47.5
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {B9880AF4-4058-466F-92A0-B7EA4A8461EE}
+      IID 37
+      NAME calib_combined.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {7397EB58-6186-4884-A637-31B85777F036}
+      <SOURCE WAVE
+        FILE "Media\calib_combined.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Desktop\MSc_Emil_Zawistowski\rendered_blocks\calib_combined.wav
+      >
+    >
+  >
+  <TRACK {63E1B1A5-1235-4604-8635-779EBC6E0E25}
+    NAME maskers
+    PEAKCOL 30474124
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {63E1B1A5-1235-4604-8635-779EBC6E0E25}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 30
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {98353F82-0CE9-48CE-9C85-7BFC4E4D3037}
+      IID 41
+      NAME maskers_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {64EDC298-7A1B-4D3C-9EF8-11B09D5DBF76}
+      <SOURCE WAVE
+        FILE "Media\maskers_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\maskers_only.wav
+      >
+    >
+    <ITEM
+      POSITION 30
+      SNAPOFFS 0
+      LENGTH 30
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {34891CB2-37B1-4368-9946-EE4CBE2A794A}
+      IID 50
+      NAME maskers_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {3285F036-7C61-49AC-9F6C-80CB9D557274}
+      <SOURCE WAVE
+        FILE "Media\maskers_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\maskers_only.wav
+      >
+    >
+    <ITEM
+      POSITION 60
+      SNAPOFFS 0
+      LENGTH 30
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {DFE3DD6C-1B26-4DB2-BC6B-45171253416D}
+      IID 51
+      NAME maskers_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {64996A2B-9971-4DDE-B82F-2187543DB259}
+      <SOURCE WAVE
+        FILE "Media\maskers_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\maskers_only.wav
+      >
+    >
+    <ITEM
+      POSITION 90
+      SNAPOFFS 0
+      LENGTH 30
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {A2A67713-270B-4451-A583-E07C0D41FA24}
+      IID 52
+      NAME maskers_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {18DB1EBB-BE6B-48D7-BCE7-3AEC25C63D6A}
+      <SOURCE WAVE
+        FILE "Media\maskers_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\maskers_only.wav
+      >
+    >
+  >
+  <TRACK {0F77464D-7770-4D58-B867-6D50C183E9B3}
+    NAME 2m
+    PEAKCOL 30474124
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {0F77464D-7770-4D58-B867-6D50C183E9B3}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {6B7D09E7-7FC4-4851-9407-B8A1B0A7E641}
+      IID 42
+      NAME target_2m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {E279A3F5-CC02-4C48-89D5-9786061103F3}
+      <SOURCE WAVE
+        FILE "Media\target_2m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_2m_only.wav
+      >
+    >
+    <ITEM
+      POSITION 30.1
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {BF935777-F0C7-4722-9659-FE006081FA06}
+      IID 47
+      NAME target_2m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {5B24CBF5-DCBB-4101-96FD-AF448639DF01}
+      <SOURCE WAVE
+        FILE "Media\target_2m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_2m_only.wav
+      >
+    >
+    <ITEM
+      POSITION 60.2
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {AD51D076-0067-4F16-80EE-12C377B14A87}
+      IID 48
+      NAME target_2m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {48D5A274-B90F-4D6A-AD0E-3EBA9D38AD51}
+      <SOURCE WAVE
+        FILE "Media\target_2m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_2m_only.wav
+      >
+    >
+    <ITEM
+      POSITION 90.3
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {E8160330-E2DB-40DC-86B4-B03D0FAB10D1}
+      IID 49
+      NAME target_2m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {712ECAA2-FEEA-41B9-805A-600079216C46}
+      <SOURCE WAVE
+        FILE "Media\target_2m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_2m_only.wav
+      >
+    >
+  >
+  <TRACK {8FFEC48E-A675-4AFC-BC3A-05782F40B98A}
+    NAME 5m
+    PEAKCOL 30474124
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {8FFEC48E-A675-4AFC-BC3A-05782F40B98A}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {56426485-655E-4611-8E02-8CCFE22C3FED}
+      IID 43
+      NAME target_5m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {08E36875-97F5-46FF-90E9-70DA27542CEE}
+      <SOURCE WAVE
+        FILE "Media\target_5m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_5m_only.wav
+      >
+    >
+    <ITEM
+      POSITION 30.1
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {04F55858-9006-46F7-9349-6B444C48CEBA}
+      IID 44
+      NAME target_5m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {EE9FD5D0-3972-4CD7-93A8-A3E130ABF892}
+      <SOURCE WAVE
+        FILE "Media\target_5m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_5m_only.wav
+      >
+    >
+    <ITEM
+      POSITION 60.2
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {0C97F78D-A824-422E-AB41-CCF974EF820C}
+      IID 45
+      NAME target_5m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {16244CEB-F883-4914-8AB7-660AC40E6AED}
+      <SOURCE WAVE
+        FILE "Media\target_5m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_5m_only.wav
+      >
+    >
+    <ITEM
+      POSITION 90.3
+      SNAPOFFS 0
+      LENGTH 30.1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {6B6B31EC-896E-4A5F-9E5E-FFECB579AD4A}
+      IID 46
+      NAME target_5m_only.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {3E40D663-CB47-4FB3-8586-C0A1DA79FE8A}
+      <SOURCE WAVE
+        FILE "Media\target_5m_only.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\target_5m_only.wav
+      >
+    >
+  >
+  <TRACK {ABA6BBEC-A7DC-408C-8135-4C00006698A3}
+    NAME sweep_2m
+    PEAKCOL 28605439
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {ABA6BBEC-A7DC-408C-8135-4C00006698A3}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 12
+      SNAPOFFS 0
+      LENGTH 30
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {FB3E9EBB-03BD-4394-B8F8-D0C7BA4F9AE1}
+      IID 63
+      NAME sweep_2m-imported.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {36176A3C-C91F-4E57-80AF-3B3C59781989}
+      <SOURCE WAVE
+        FILE "Media\sweep_2m-imported.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\sweep_2m.wav
+      >
+    >
+  >
+  <TRACK {A8FF1578-9D7E-4D8D-8151-AE17C360F4C1}
+    NAME sweep_5m
+    PEAKCOL 28605439
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 1 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {A8FF1578-9D7E-4D8D-8151-AE17C360F4C1}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 12
+      SNAPOFFS 0
+      LENGTH 30
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {1FB2EE4B-879B-4239-AED9-05788553979D}
+      IID 64
+      NAME sweep_5m-imported.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {CDAD5B56-0A2F-4AE5-ACE3-2FAD0FC9B9D5}
+      <SOURCE WAVE
+        FILE "Media\sweep_5m-imported.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\sweep_5m.wav
+      >
+    >
+  >
+  <TRACK {05B4D321-08ED-4324-9FCE-8B21F854B16E}
+    NAME "behavioral test"
+    PEAKCOL 0
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 0.30902659488464 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 0
+    REC 0 -1 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 25 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 60
+    FX 1
+    TRACKID {05B4D321-08ED-4324-9FCE-8B21F854B16E}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 0 0
+    HWOUT 0 0 1 0 0 0 0 -1:U -1
+    HWOUT 2 0 1 0 0 0 2 -1:U -1
+    HWOUT 4 0 1 0 0 0 4 -1:U -1
+    HWOUT 6 0 1 0 0 0 6 -1:U -1
+    HWOUT 8 0 1 0 0 0 8 -1:U -1
+    HWOUT 10 0 1 0 0 0 10 -1:U -1
+    HWOUT 12 0 1 0 0 0 12 -1:U -1
+    HWOUT 14 0 1 0 0 0 14 -1:U -1
+    HWOUT 16 0 1 0 0 0 16 -1:U -1
+    HWOUT 18 0 1 0 0 0 18 -1:U -1
+    HWOUT 20 0 1 0 0 0 20 -1:U -1
+    HWOUT 22 0 1 0 0 0 22 -1:U -1
+    HWOUT 24 0 1 0 0 0 24 -1:U -1
+    HWOUT 26 0 1 0 0 0 26 -1:U -1
+    HWOUT 28 0 1 0 0 0 28 -1:U -1
+    HWOUT 30 0 1 0 0 0 30 -1:U -1
+    HWOUT 32 0 1 0 0 0 32 -1:U -1
+    HWOUT 34 0 1 0 0 0 34 -1:U -1
+    HWOUT 36 0 1 0 0 0 36 -1:U -1
+    HWOUT 38 0 1 0 0 0 38 -1:U -1
+    HWOUT 40 0 1 0 0 0 40 -1:U -1
+    HWOUT 42 0 1 0 0 0 42 -1:U -1
+    HWOUT 44 0 1 0 0 0 44 -1:U -1
+    HWOUT 46 0 1 0 0 0 46 -1:U -1
+    HWOUT 48 0 1 0 0 0 48 -1:U -1
+    HWOUT 50 0 1 0 0 0 50 -1:U -1
+    HWOUT 52 0 1 0 0 0 52 -1:U -1
+    HWOUT 54 0 1 0 0 0 54 -1:U -1
+    HWOUT 56 0 1 0 0 0 56 -1:U -1
+    HWOUT 58 0 1 0 0 0 58 -1:U -1
+    <ITEM
+      POSITION 12
+      SNAPOFFS 0
+      LENGTH 235
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 1
+      IGUID {20C3ABE5-F2D2-4CBE-8573-2E880B6642FD}
+      IID 67
+      NAME pilot_2afc_audio.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 0 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {E8CD0A45-B8F5-40C8-A072-05C1EEFB49EA}
+      <SOURCE WAVE
+        FILE "Media\pilot_2afc_audio.wav"
+      >
+      <EXT
+        ORIGINAL_FILENAME C:\Users\emil\Downloads\pilot_2afc_audio.wav
+      >
+    >
+  >
+>

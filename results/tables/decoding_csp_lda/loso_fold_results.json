@@ -1,0 +1,110 @@
+[
+  {
+    "held_out_index": 0,
+    "n_test_trials": 199,
+    "accuracy": 0.4271356783919598,
+    "auc": 0.1616161616161616
+  },
+  {
+    "held_out_index": 1,
+    "n_test_trials": 198,
+    "accuracy": 0.3434343434343434,
+    "auc": 0.2293877551020408
+  },
+  {
+    "held_out_index": 2,
+    "n_test_trials": 146,
+    "accuracy": 0.4315068493150685,
+    "auc": 0.37011146797657285
+  },
+  {
+    "held_out_index": 3,
+    "n_test_trials": 199,
+    "accuracy": 0.6984924623115578,
+    "auc": 0.7905050505050505
+  },
+  {
+    "held_out_index": 4,
+    "n_test_trials": 199,
+    "accuracy": 0.8190954773869347,
+    "auc": 0.8782828282828283
+  },
+  {
+    "held_out_index": 5,
+    "n_test_trials": 199,
+    "accuracy": 0.5376884422110553,
+    "auc": 0.6101010101010101
+  },
+  {
+    "held_out_index": 6,
+    "n_test_trials": 199,
+    "accuracy": 0.4824120603015075,
+    "auc": 0.501010101010101
+  },
+  {
+    "held_out_index": 7,
+    "n_test_trials": 196,
+    "accuracy": 0.41836734693877553,
+    "auc": 0.35745522698875465
+  },
+  {
+    "held_out_index": 8,
+    "n_test_trials": 190,
+    "accuracy": 0.5157894736842106,
+    "auc": 0.35605053191489366
+  },
+  {
+    "held_out_index": 9,
+    "n_test_trials": 197,
+    "accuracy": 0.4263959390862944,
+    "auc": 0.3104514533085962
+  },
+  {
+    "held_out_index": 10,
+    "n_test_trials": 190,
+    "accuracy": 0.4631578947368421,
+    "auc": 0.42957042957042957
+  },
+  {
+    "held_out_index": 11,
+    "n_test_trials": 194,
+    "accuracy": 0.4793814432989691,
+    "auc": 0.4953231292517007
+  },
+  {
+    "held_out_index": 12,
+    "n_test_trials": 128,
+    "accuracy": 0.2734375,
+    "auc": 0.2035323801513877
+  },
+  {
+    "held_out_index": 13,
+    "n_test_trials": 198,
+    "accuracy": 0.47474747474747475,
+    "auc": 0.3860204081632653
+  },
+  {
+    "held_out_index": 14,
+    "n_test_trials": 158,
+    "accuracy": 0.25949367088607594,
+    "auc": 0.18733198924731181
+  },
+  {
+    "held_out_index": 15,
+    "n_test_trials": 196,
+    "accuracy": 0.5,
+    "auc": 0.41726543788399456
+  },
+  {
+    "held_out_index": 16,
+    "n_test_trials": 197,
+    "accuracy": 0.5786802030456852,
+    "auc": 0.8656977942692228
+  },
+  {
+    "held_out_index": 17,
+    "n_test_trials": 185,
+    "accuracy": 0.34054054054054056,
+    "auc": 0.2071764705882353
+  }
+]

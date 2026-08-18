@@ -1,0 +1,21 @@
+{
+  "participant": "P06",
+  "block": "C",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    0,
+    1
+  ],
+  "bad_channels": [
+    "Fp1",
+    "F7",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 3,
+  "n_std_before": 500,
+  "n_std_after": 480,
+  "n_std_rejected": 20,
+  "pct_std_rejected": 4.0
+}

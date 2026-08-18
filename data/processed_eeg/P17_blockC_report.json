@@ -1,0 +1,26 @@
+{
+  "participant": "P17",
+  "block": "C",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    0,
+    1
+  ],
+  "bad_channels": [
+    "FT9",
+    "P8",
+    "T8"
+  ],
+  "bridged_electrode_pairs": [
+    [
+      "Oz",
+      "O2"
+    ]
+  ],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 3,
+  "n_std_before": 500,
+  "n_std_after": 448,
+  "n_std_rejected": 52,
+  "pct_std_rejected": 10.4
+}

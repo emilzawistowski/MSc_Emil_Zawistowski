@@ -1,0 +1,23 @@
+{
+  "participant": "P19",
+  "block": "A",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    1
+  ],
+  "bad_channels": [
+    "FT9",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 2,
+  "n_std_before": 300,
+  "n_std_after": 296,
+  "n_std_rejected": 4,
+  "pct_std_rejected": 1.3,
+  "n_dev_before": 100,
+  "n_dev_after": 99,
+  "n_dev_rejected": 1,
+  "pct_dev_rejected": 1.0
+}

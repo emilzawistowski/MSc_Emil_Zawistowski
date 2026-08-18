@@ -1,0 +1,21 @@
+{
+  "participant": "P12",
+  "block": "C",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    0
+  ],
+  "bad_channels": [
+    "Fp1",
+    "F7",
+    "FT9",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 4,
+  "n_std_before": 500,
+  "n_std_after": 491,
+  "n_std_rejected": 9,
+  "pct_std_rejected": 1.8
+}

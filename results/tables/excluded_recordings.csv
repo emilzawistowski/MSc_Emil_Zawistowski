@@ -1,0 +1,3 @@
+participant,block,reasons,rms_last_vs_first_ratio,signal_power_robust_z,flat_rms_rel_std
+P04,B,"rising_noise(rms_ratio=6.70>2.0); anomalous_signal_power(z=17.6, threshold=|5.0|)",6.6987532131082554,17.587021952382774,0.7276813135352916
+P18,C,"anomalous_signal_power(z=15.1, threshold=|5.0|); flat_clipped_signal(rel_std=0.0000<1e-06)",1.2734910097470518,15.080069575433209,1.9918070168577752e-16

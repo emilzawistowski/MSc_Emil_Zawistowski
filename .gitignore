@@ -1,0 +1,55 @@
+# --- Python & Environment Caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+
+# --- Operating System & Editor Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Heavy Dataset & Audio Binaries ---
+# Raw EEG datasets
+data/raw_eeg/eeg_data/
+data/raw_eeg/vhdr_data/
+data/raw_eeg/vmrk_data/
+
+# Processed MNE epoch files & temporary cache
+data/processed_eeg/*.fif
+data/processed_eeg/tmp/
+data/processed_eeg/vmrk_cleaned/*.vmrk_old
+
+# Raw & rendered audio files (.wav)
+*.wav
+data/corpora/
+data/sweep/*.wav
+measurement_scenes/*.wav
+measurement_scenes/recorded_RIR/*.wav
+measurement_scenes/generated_RIR/*.wav
+rendered_blocks/*.wav
+
+# REAPER audio peak caches and backups
+*.reapeaks
+*.rpp-bak
+
+# Binary measurement data
+*.mdat
+
+# --- Legacy ---
+_trash/
+*.bak
+
+
+docs/

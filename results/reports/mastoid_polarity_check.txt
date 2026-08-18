@@ -1,0 +1,34 @@
+======================================================================
+MASTOID POLARITY-REVERSAL CHECK (CAR reference, sign comparison)
+======================================================================
+
+CAVEAT: this check compares the sign of Fz against the sign of TP9
+and TP10 INDEPENDENTLY, on the same common-average reference (CAR)
+used throughout the main pipeline - it does NOT re-reference to
+TP9/TP10 (an earlier version of this script did that and produced
+a meaningless result: referencing two channels to their own average
+algebraically forces them to sum to zero and be equal-and-opposite
+for any input, which is a property of the arithmetic, not a finding
+about the EEG). TP9/TP10 also only approximately correspond to the
+true mastoids per the CLACS-32 montage documentation, and CAR does
+not carry the same textbook guarantee as a nose-tip reference for
+this criterion. Interpret as a supportive, secondary diagnostic -
+see thesis Limitations.
+
+Block A (Near-deviant) (N=20, grand average, CAR reference (as in main pipeline), window 150-300 ms):
+    Fz   = +0.065 uV
+    TP9  = +0.248 uV   (reversal vs Fz: NOT OBSERVED)
+    TP10 = +0.152 uV   (reversal vs Fz: NOT OBSERVED)
+
+Block B (Far-deviant) (N=18, grand average, CAR reference (as in main pipeline), window 150-300 ms):
+    Fz   = +0.267 uV
+    TP9  = -0.186 uV   (reversal vs Fz: NOT OBSERVED)
+    TP10 = -0.623 uV   (reversal vs Fz: NOT OBSERVED)
+
+----------------------------------------------------------------------
+PER-PARTICIPANT SUMMARY:
+  Block A: reversal at TP9 and/or TP10 in 9 / 20 participants; at BOTH in 6 / 20.
+  Block B: reversal at TP9 and/or TP10 in 4 / 18 participants; at BOTH in 0 / 18.
+
+Full per-participant table: /Users/emil/Desktop/MSc_Emil_Zawistowski/results/tables/mastoid_polarity_check.csv
+======================================================================

@@ -1,0 +1,178 @@
+{
+  "fs": 48000,
+  "soa_s": 2.0,
+  "distances": {
+    "2.0": {
+      "reference_channel": 22,
+      "reference_channel_wfs_delay_s": 0.0014577259475218659,
+      "trigger_code": 202
+    },
+    "5.0": {
+      "reference_channel": 22,
+      "reference_channel_wfs_delay_s": 0.01020408163265306,
+      "trigger_code": 205
+    }
+  },
+  "trials": [
+    {
+      "trial_idx": 0,
+      "onset_time_s": 1.0,
+      "onset_sample": 48000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 1,
+      "onset_time_s": 3.0,
+      "onset_sample": 144000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 2,
+      "onset_time_s": 5.0,
+      "onset_sample": 240000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 3,
+      "onset_time_s": 7.0,
+      "onset_sample": 336000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 4,
+      "onset_time_s": 9.0,
+      "onset_sample": 432000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 5,
+      "onset_time_s": 11.0,
+      "onset_sample": 528000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 6,
+      "onset_time_s": 13.0,
+      "onset_sample": 624000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 7,
+      "onset_time_s": 15.0,
+      "onset_sample": 720000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 8,
+      "onset_time_s": 17.0,
+      "onset_sample": 816000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 9,
+      "onset_time_s": 19.0,
+      "onset_sample": 912000,
+      "trigger_code": 202,
+      "distance_m": 2.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 0,
+      "onset_time_s": 24.0,
+      "onset_sample": 1152000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 1,
+      "onset_time_s": 26.0,
+      "onset_sample": 1248000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 2,
+      "onset_time_s": 28.0,
+      "onset_sample": 1344000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 3,
+      "onset_time_s": 30.0,
+      "onset_sample": 1440000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 4,
+      "onset_time_s": 32.0,
+      "onset_sample": 1536000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 5,
+      "onset_time_s": 34.0,
+      "onset_sample": 1632000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 6,
+      "onset_time_s": 36.0,
+      "onset_sample": 1728000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 7,
+      "onset_time_s": 38.0,
+      "onset_sample": 1824000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 8,
+      "onset_time_s": 40.0,
+      "onset_sample": 1920000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    },
+    {
+      "trial_idx": 9,
+      "onset_time_s": 42.0,
+      "onset_sample": 2016000,
+      "trigger_code": 205,
+      "distance_m": 5.0,
+      "reference_channel": 22
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "participant": "P03",
+  "block": "B",
+  "sfreq_original": 500.0,
+  "ica_components_removed": [
+    0,
+    2
+  ],
+  "bad_channels": [
+    "O1",
+    "CP6",
+    "FC6",
+    "Fp1",
+    "F4",
+    "F8",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 7,
+  "n_std_before": 300,
+  "n_std_after": 214,
+  "n_std_rejected": 86,
+  "pct_std_rejected": 28.7,
+  "n_dev_before": 100,
+  "n_dev_after": 79,
+  "n_dev_rejected": 21,
+  "pct_dev_rejected": 21.0
+}

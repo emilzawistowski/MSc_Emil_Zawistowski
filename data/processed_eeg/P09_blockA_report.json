@@ -1,0 +1,32 @@
+{
+  "participant": "P09",
+  "block": "A",
+  "sfreq_original": 1000.0,
+  "ica_components_removed": [
+    1,
+    0
+  ],
+  "bad_channels": [
+    "Fp1",
+    "F7",
+    "FT10",
+    "F8",
+    "Fp2"
+  ],
+  "bridged_electrode_pairs": [
+    [
+      "Oz",
+      "O2"
+    ]
+  ],
+  "manual_review_required": false,
+  "n_bad_detected_before_truncation": 5,
+  "n_std_before": 300,
+  "n_std_after": 300,
+  "n_std_rejected": 0,
+  "pct_std_rejected": 0.0,
+  "n_dev_before": 100,
+  "n_dev_after": 100,
+  "n_dev_rejected": 0,
+  "pct_dev_rejected": 0.0
+}

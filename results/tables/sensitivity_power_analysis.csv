@@ -1,0 +1,8 @@
+Test,N,Alternative,Observed_SD_uV,Observed_d,MDE_Cohen_d_80pct_power,MDE_uV_at_observed_SD,Achieved_power_at_observed_d
+"H1: MMN_A (Near-deviant, block A) vs 0",20,one-sided,1.0403,0.063,0.577,0.6,0.085
+"H1: MMN_B (Far-deviant, block B) vs 0",18,one-sided,0.5841,0.457,0.611,0.357,0.586
+H3: P3a_A (deviant block A) vs 0,20,one-sided,0.6235,-0.352,0.577,0.36,0.45
+H3: P3a_B (deviant block B) vs 0,18,one-sided,0.7795,0.458,0.611,0.476,0.586
+SSA_AC: dev_A - ctrl_C vs 0,19,one-sided,0.9216,0.199,0.593,0.547,0.209
+SSA_BC: dev_B - ctrl_C vs 0,17,one-sided,0.6035,0.216,0.63,0.38,0.214
+"H2: MMN_A vs MMN_B (paired, A < B)",18,one-sided,1.0449,-0.331,0.611,0.638,0.383

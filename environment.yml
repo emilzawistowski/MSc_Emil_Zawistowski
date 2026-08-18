@@ -1,0 +1,23 @@
+name: thesis_eeg
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.11
+  - mne
+  - numpy
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - pandas
+  - jupyterlab
+  - ipykernel
+  - sounddevice
+  - soundfile
+  - pyserial
+  - tqdm
+  - requests
+  - pip
+  - pip:
+      - sfs
+      - praat-parselmouth
