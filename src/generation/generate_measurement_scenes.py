@@ -4,7 +4,7 @@ import soundfile as sf
 from pathlib import Path
 from tqdm import tqdm
 
-
+# Import functions from the main script (assumed to be in the same directory)
 from wfs_pipeline_scene_generator import (
     build_square_array,
     render_point_source_wfs,
@@ -26,15 +26,16 @@ from wfs_pipeline_scene_generator import (
     TARGET_DURATION
 )
 
+# === Configuration for measurement files ===
+MEASUREMENT_SOA = 1.5        # interval between target repetitions
+N_REPEATS = 20               # number of target repetitions
+MASKER_DURATION = 30.0       # duration of continuous masker segment
 
-MEASUREMENT_SOA = 1.5                                             
-N_REPEATS = 20                                             
-MASKER_DURATION = 30.0                                              
+# Select one token for measurement (e.g. 'head.wav' – index 1, but you can choose any)
+TOKEN_INDEX = 1   # e.g. 0 = had, 1 = head, etc.
 
-
-TOKEN_INDEX = 1                                 
-
-
+# Distances at which DRR/impulse-response sweeps should be rendered.
+# These match the near/far target distances used in the main experiment.
 SWEEP_DISTANCES = [2.0, 5.0]
 
 
@@ -44,16 +45,16 @@ def generate_maskers_only(array, masker_wavs):
     n_speakers = len(array.x)
     audio_mix = np.zeros((n_speakers, total_samples))
 
-
+    print("Rendering maskers only...")
     for mask_idx, azimuth in enumerate(tqdm(MASKER_AZIMUTHS)):
         masker_wav = masker_wavs[mask_idx % len(masker_wavs)]
-
+        # Repeat masker to fill entire time
         n_repeats = int(np.ceil(total_samples / len(masker_wav)))
         masker_looped = np.tile(masker_wav, n_repeats)[:total_samples]
-        masker_cal = apply_spl_calibration(masker_looped, MASKER_SPL - 6)                         
+        masker_cal = apply_spl_calibration(masker_looped, MASKER_SPL - 6)  # same as in experiment
         masker_pos = azimuth_to_cartesian(azimuth, MASKER_DISTANCE)
 
-
+        # Render in chunks (as in original)
         chunk_size = FS * 10
         for cs in range(0, len(masker_cal), chunk_size):
             ce = min(cs + chunk_size, len(masker_cal))
@@ -65,18 +66,20 @@ def generate_maskers_only(array, masker_wavs):
 
 def generate_targets_only(array, target_wav, distance):
     """Generates file with repeated target at given distance."""
-
-    total_duration = N_REPEATS * MEASUREMENT_SOA + 0.1                 
+    # Calculate total file length: N_REPEATS * SOA + some margin (e.g. + duration)
+    total_duration = N_REPEATS * MEASUREMENT_SOA + 0.1   # 0.1 s margin
     total_samples = int(total_duration * FS)
     n_speakers = len(array.x)
     audio_mix = np.zeros((n_speakers, total_samples))
 
-
+    # Prepare rendered single target (will be used multiple times)
+    # Assume target_wav has length TARGET_DURATION (600 ms)
     source_pos = azimuth_to_cartesian(TARGET_AZIMUTH, distance)
-
+    # Render it once to get temporal shape (length will be same as audio length)
     single_rendered = render_point_source_wfs(target_wav, FS, source_pos, array)
+    # single_rendered has shape (n_speakers, len(target_wav))
 
-
+    print(f"Rendering target at {distance} m, {N_REPEATS} repeats...")
     for i in tqdm(range(N_REPEATS)):
         onset_sample = int(i * MEASUREMENT_SOA * FS)
         end_sample = onset_sample + single_rendered.shape[1]
@@ -131,7 +134,7 @@ def generate_sweep_at_distance(array, sweep_wav, distance):
     """
     source_pos = azimuth_to_cartesian(TARGET_AZIMUTH, distance)
 
-
+    print(f"Rendering calibration sweep at {distance} m (single continuous pass, no chunking)...")
     audio_mix = render_point_source_wfs(sweep_wav, FS, source_pos, array)
 
     return audio_mix
@@ -150,21 +153,26 @@ def main():
     )
     args = parser.parse_args()
 
+    print("Generating measurement scenes (for SPL calibration)")
 
+    # 1. Build array
+    print("Building array...")
     array = build_square_array(N_PER_WALL, SPACING, WALL_DIST)
+    print(f"Array has {len(array.x)} speakers")
 
-
+    # 2. Load targets (we need only one)
+    print("Loading targets...")
     target_files = sorted(TARGET_DIR.glob('*.wav'))[:9]
     if len(target_files) < TOKEN_INDEX + 1:
         raise ValueError(f"Not enough target files, need at least {TOKEN_INDEX+1}")
-
+    # Load selected token
     wav, fs = sf.read(target_files[TOKEN_INDEX])
     if fs != FS:
         from scipy.signal import resample
         wav = resample(wav, int(len(wav) * FS / fs))
     if wav.ndim > 1:
         wav = wav.mean(axis=1)
-
+    # Trim to TARGET_DURATION (ensure it lasts 600 ms)
     expected_len = int(TARGET_DURATION * FS)
     if len(wav) > expected_len:
         wav = wav[:expected_len]
@@ -172,7 +180,8 @@ def main():
         wav = np.pad(wav, (0, expected_len - len(wav)))
     target_wav = apply_spl_calibration(wav, TARGET_SPL)
 
-
+    # 3. Load maskers
+    print("Loading maskers...")
     masker_files = sorted(MASKER_DIR.glob('*.wav'))[:4]
     if len(masker_files) < 4:
         raise ValueError(f"Need 4 maskers, found {len(masker_files)}")
@@ -180,36 +189,47 @@ def main():
     for mf in masker_files:
         masker_wavs.append(load_and_verify_audio(mf))
 
-
+    # 4. Generate files
     output_dir = Path("./measurement_scenes")
     output_dir.mkdir(exist_ok=True)
 
-
+    # 4a. Maskers
+    print("\n--- Generating maskers only ---")
     masker_mix = generate_maskers_only(array, masker_wavs)
     sf.write(output_dir / "maskers_only.wav", masker_mix.T, FS)
+    print("Saved maskers_only.wav")
 
-
+    # 4b. Target 2 m
+    print("\n--- Generating target 2 m ---")
     mix_2m = generate_targets_only(array, target_wav, 2.0)
     sf.write(output_dir / "target_2m_only.wav", mix_2m.T, FS)
+    print("Saved target_2m_only.wav")
 
-
+    # 4c. Target 5 m
+    print("\n--- Generating target 5 m ---")
     mix_5m = generate_targets_only(array, target_wav, 5.0)
     sf.write(output_dir / "target_5m_only.wav", mix_5m.T, FS)
+    print("Saved target_5m_only.wav")
 
-
+    # 4d. Calibration sweep at each measurement distance (DRR / impulse response)
     if args.sweep is not None and args.sweep.exists():
-
+        print(f"\n--- Loading sweep from {args.sweep} ---")
         sweep_wav = load_sweep(args.sweep)
 
         for distance in SWEEP_DISTANCES:
-
+            print(f"\n--- Generating sweep at {distance} m ---")
             sweep_mix = generate_sweep_at_distance(array, sweep_wav, distance)
             out_name = f"sweep_{distance:g}m.wav"
             sf.write(output_dir / out_name, sweep_mix.T, FS)
-
+            print(f"Saved {out_name}")
     else:
+        print(f"\nNo sweep file found at {args.sweep}: skipping DRR sweep rendering. "
+              "Pass --sweep path/to/sweep.wav (or place the file at the default "
+              "path) to also generate sweep_2m.wav and sweep_5m.wav for "
+              "impulse-response measurement.")
+
+    print("\nDone. Files are in 'measurement_scenes' directory.")
 
 
-        pass
 if __name__ == "__main__":
     main()

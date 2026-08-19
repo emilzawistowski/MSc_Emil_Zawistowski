@@ -110,7 +110,7 @@ def _safe_ttest(
             dof = n - 1
             mean_diff = clean.mean() - y_clean
             sd = clean.std(ddof=1)
-            d = t_stat / np.sqrt(n)                            
+            d = t_stat / np.sqrt(n)  # Cohen's d for one-sample
             se = sd / np.sqrt(n)
             if se > 0:
                 crit = stats.t.ppf(1 - 0.025, df=dof)
@@ -183,6 +183,7 @@ def _format_ieee_ttest(
     return "\n".join(lines)
 
 
+# DATA LOADING
 def load_erp_measures() -> pd.DataFrame:
     csv_path = Path(config.STATS_PATH) / "erp_measures.csv"
     try:
@@ -197,6 +198,7 @@ def load_erp_measures() -> pd.DataFrame:
         raise
 
 
+# ANALYSIS 1: H1 – MMN Significance
 def analysis_h1(df: pd.DataFrame) -> dict:
     _print_section("ANALYSIS 1: H1 – MMN Significance (Bayesian t-test vs 0)")
     results = {}
@@ -215,11 +217,12 @@ def analysis_h1(df: pd.DataFrame) -> dict:
     return results
 
 
+# ANALYSIS 2: H2 – Looming asymmetry (DIRECTIONAL: Near > Far)
 def analysis_h2(df: pd.DataFrame) -> dict:
     _print_section("ANALYSIS 2: H2 – Looming asymmetry (A vs B, paired, DIRECTIONAL)")
     results = {}
 
-
+    # --- Amplitude ---
     common_idx = df["mmn_A_amp_Fz"].notna() & df["mmn_B_amp_Fz"].notna()
     amp_A = df.loc[common_idx, "mmn_A_amp_Fz"]
     amp_B = df.loc[common_idx, "mmn_B_amp_Fz"]
@@ -237,7 +240,7 @@ def analysis_h2(df: pd.DataFrame) -> dict:
         "sd_B": float(amp_B.std(ddof=1)),
     }
 
-
+    # --- FAL ---
     common_fal = df["mmn_A_fal_ms"].notna() & df["mmn_B_fal_ms"].notna()
     fal_A = df.loc[common_fal, "mmn_A_fal_ms"]
     fal_B = df.loc[common_fal, "mmn_B_fal_ms"]
@@ -257,6 +260,7 @@ def analysis_h2(df: pd.DataFrame) -> dict:
     return results
 
 
+# ANALYSIS 3: H3 – P3a Significance
 def analysis_h3(df: pd.DataFrame) -> dict:
     _print_section("ANALYSIS 3: H3 – P3a Significance (t-test vs 0, alternative='greater')")
     results = {}
@@ -271,6 +275,7 @@ def analysis_h3(df: pd.DataFrame) -> dict:
     return results
 
 
+# ANALYSIS 4: SSA Control (deviant vs Block C) – confirmatory
 def analysis_ssa(df: pd.DataFrame) -> dict:
     _print_section("ANALYSIS 4: SSA Control – deviant vs Block C (confirmatory)")
     results = {}
@@ -280,7 +285,7 @@ def analysis_ssa(df: pd.DataFrame) -> dict:
         m = float(amps.mean())
         sd = float(amps.std(ddof=1))
         log.info("\n[SSA] %s: N=%d, M=%.3f µV, SD=%.3f µV", key.upper(), n, m, sd)
-
+        # alternative='less' because we expect deviant to be MORE NEGATIVE than control
         result = _safe_ttest(amps, 0.0, paired=False, alternative="less", label=f"SSA_{key}")
         results[key] = {"result": result, "n": n, "mean": m, "sd": sd}
         if result is not None:
@@ -290,11 +295,13 @@ def analysis_ssa(df: pd.DataFrame) -> dict:
     return results
 
 
+# ANALYSIS 5: Cluster permutation (sketch)
 def analysis_cluster_permutation_from_csv(df: pd.DataFrame) -> None:
     _print_section("ANALYSIS 5: Cluster permutation – INSTRUCTIONS")
     log.info("Cluster test requires Evoked data (MNE). Call run_cluster_permutation() directly using Evoked lists.")
 
 
+# ANALYSIS 6: Descriptive Statistics
 def descriptive_statistics(df: pd.DataFrame) -> pd.DataFrame:
     _print_section("ANALYSIS 6: Descriptive Statistics")
     conditions = {
@@ -329,6 +336,7 @@ def descriptive_statistics(df: pd.DataFrame) -> pd.DataFrame:
     return desc_df
 
 
+# ANALYSIS 7: IEEE Formatting (updated to include SSA)
 def generate_ieee_report(
     h1_results: dict,
     h2_results: dict,
@@ -402,7 +410,7 @@ def generate_ieee_report(
                 note="One-sided hypothesis (alternative='greater', expected positive P3a amplitude)",
             )
         )
-
+    # --- SSA Control ---
     lines += ["", "SSA CONTROL (deviant vs Block C) – confirmatory test", "-" * 70]
     for key in ("ssa_AC", "ssa_BC"):
         r = ssa_results.get(key, {})
@@ -452,7 +460,7 @@ def main() -> None:
     with open(ieee_path, "w", encoding="utf-8") as f:
         f.write(ieee_text)
     log.info("Saved IEEE report: %s", ieee_path)
-
+    print("\n" + ieee_text)
 
     log.info("=" * 60)
     log.info("03_statistics.py – FINISHED SUCCESSFULLY")

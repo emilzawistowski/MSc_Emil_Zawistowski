@@ -6,6 +6,9 @@ from scipy.fft import rfft, irfft
 from scipy.signal import stft
 import matplotlib.pyplot as plt
 
+# ------------------------------------------------------------
+# HELPER FUNCTIONS
+# ------------------------------------------------------------
 
 MAX_ANALYSIS_S = 60.0
 SWEEP_F1_HZ = 20.0
@@ -36,9 +39,8 @@ def estimate_clock_drift_and_onset(recorded, fs, sweep_duration_s,
     valid = (~np.isnan(peak_freqs)) & (peak_freqs > f1 * 3)
     if np.sum(valid) < 20:
         if debug:
-
-
-            pass
+            print("  [DEBUG] Too few reliable frequency points (STFT) to estimate "
+                  "clock drift -- falling back to simple energy threshold.")
         return 1.0, 0.0, None, None
 
     tt = t_axis[valid]
@@ -89,7 +91,10 @@ def estimate_clock_drift_and_onset(recorded, fs, sweep_duration_s,
         extra = (f", onset extrapolation uncertainty (~1 sigma) = "
                  f"{onset_uncertainty_s*1000:.2f} ms" if onset_uncertainty_s is not None
                  else ", onset extrapolation uncertainty: could not be computed")
-
+        print(f"  [DEBUG] Clock drift: a={a:.6f} ({(a-1)*1e6:+.1f} ppm), "
+              f"onset={onset_s:.4f}s ({onset_sample} samples), "
+              f"fit residual std={residual_std*1000:.1f} ms (n={len(tt)} points)"
+              f"{extra}")
 
     return float(a), float(b), onset_sample, residual_std
 
@@ -104,14 +109,15 @@ def deconvolve(recorded_file, ref_file, debug=False):
     reference = reference.sum(axis=1)
 
     if fs_rec != fs_ref:
-
-        pass
+        print(f"  WARNING: Different sample rates! Recording: {fs_rec}, Reference: {fs_ref}. Using recording fs.")
     fs = fs_rec
 
     if debug:
+        print(f"  [DEBUG] {os.path.basename(recorded_file)}: "
+              f"recording = {len(recorded)/fs:.2f} s ({len(recorded)} samples), "
+              f"reference = {os.path.basename(ref_file)} = {len(reference)/fs_ref:.2f} s "
+              f"({len(reference)} samples), fs_rec={fs_rec}, fs_ref={fs_ref}")
 
-
-        pass
     max_samples = int(MAX_ANALYSIS_S * fs)
     if len(recorded) > max_samples:
         recorded = recorded[:max_samples]
@@ -141,14 +147,12 @@ def deconvolve(recorded_file, ref_file, debug=False):
         onset_sample = int(above[0] * coarse_win) if len(above) > 0 else 0
         a_drift = 1.0
         if debug:
-
-
-            pass
+            print(f"  [DEBUG] Fallback (energy threshold): onset = {onset_sample} samples "
+                  f"({onset_sample/fs*1000:.1f} ms), no drift correction.")
     elif abs(a_drift - 1.0) > 0.05:
         if debug:
-
-
-            pass
+            print(f"  [DEBUG] Estimated drift ({(a_drift-1)*1e6:+.0f} ppm) is "
+                  f"physically unrealistic -- skipping drift correction, using only onset.")
         a_drift = 1.0
 
     if a_drift != 1.0:
@@ -157,9 +161,10 @@ def deconvolve(recorded_file, ref_file, debug=False):
         recorded = _resample(recorded, n_resampled)
         onset_sample = int(round(onset_sample / a_drift))
         if debug:
+            print(f"  [DEBUG] Recording resampled by factor {1/a_drift:.6f} "
+                  f"({len(recorded)} samples after resampling), corrected onset = "
+                  f"{onset_sample} samples ({onset_sample/fs*1000:.1f} ms)")
 
-
-            pass
     offset = max(0, onset_sample)
 
     pre_roll_samples = int(0.5 * fs)
@@ -198,9 +203,11 @@ def deconvolve(recorded_file, ref_file, debug=False):
     peak_idx_dbg = np.argmax(np.abs(IR))
     peak_to_rms = np.abs(IR[peak_idx_dbg]) / (np.sqrt(np.mean(IR ** 2)) + 1e-12)
     if debug:
+        print(f"  [DEBUG] IR: length={len(IR)} samples ({len(IR)/fs*1000:.1f} ms), "
+              f"peak_idx={peak_idx_dbg} ({peak_idx_dbg/fs*1000:.2f} ms), "
+              f"peak/RMS={peak_to_rms:.2f} (good deconvolution usually >5-10; "
+              f"<3 means smeared/incorrect peak)")
 
-
-        pass
     return IR, fs, peak_to_rms
 
 
@@ -242,8 +249,7 @@ def detect_direct_sound_peak(ir, fs, debug=False):
     """
     peak_idx = int(np.argmax(np.abs(ir)))
     if debug:
-
-        pass
+        print(f"  [DEBUG] Direct-sound peak (argmax): {peak_idx} ({peak_idx/fs*1000:.2f} ms)")
     return peak_idx
 
 
@@ -256,12 +262,11 @@ def align_and_average(ir_list, fs, quality_list=None, quality_threshold=8.0, deb
         kept = [(ir, q) for ir, q in zip(ir_list, quality_list) if q >= quality_threshold]
         dropped_n = len(ir_list) - len(kept)
         if debug and dropped_n > 0:
-
-
-            pass
+            print(f"  [DEBUG] Dropped {dropped_n}/{len(ir_list)} recordings due to low quality "
+                  f"(peak/RMS < {quality_threshold}) before averaging.")
         if len(kept) == 0:
-
-
+            print(f"  WARNING: all {len(ir_list)} recordings are below the quality threshold "
+                  f"({quality_threshold}) -- averaging anyway, but the result is unreliable.")
             kept = list(zip(ir_list, quality_list))
         ir_list = [ir for ir, q in kept]
 
@@ -326,8 +331,8 @@ def plot_ir(ir, fs, drr, distance_label, save_path=None, early_ms=2.5, late_ms=3
                 label=f'End of early window ({early_ms:g}ms)')
     plt.xlabel('Time [s]')
     plt.ylabel('Amplitude (normalized)')
-
-
+    # No title on the figure itself — distance and DRR value go in the
+    # LaTeX \caption{} instead.
     plt.legend()
     plt.grid(True, alpha=0.3)
     if save_path:
@@ -340,11 +345,11 @@ def inspect_reference(ref_file, label):
     data, fs = sf.read(ref_file, always_2d=True)
     n_channels = data.shape[1]
     active_channels = np.where(np.max(np.abs(data), axis=0) > 1e-6)[0]
-
-
+    print(f"  [DEBUG] Reference {label}: {info.frames} samples ({info.frames/fs:.2f} s), "
+          f"{n_channels} channels, {len(active_channels)} active (non-zero) channels: "
+          f"{active_channels.tolist()[:10]}{'...' if len(active_channels) > 10 else ''}")
     if len(active_channels) == 0:
-
-        pass
+        print(f"  WARNING: reference file {label} is completely SILENT on all channels!")
     return data, fs, active_channels
 
 
@@ -353,12 +358,14 @@ def main():
     rec_dir = "data/measurement_scenes/recorded_RIR"
 
     if not os.path.exists(ref_dir):
-
+        print(f"Reference folder {ref_dir} does not exist!")
         return
     if not os.path.exists(rec_dir):
-
+        print(f"Recording folder {rec_dir} does not exist!")
         return
 
+    print(f"References (source sweeps): {ref_dir}")
+    print(f"Recordings (from microphone): {rec_dir}")
 
     ref_2m = os.path.join(ref_dir, "sweep_2m.wav")
     ref_5m = os.path.join(ref_dir, "sweep_5m.wav")
@@ -367,29 +374,28 @@ def main():
         candidates = glob.glob(os.path.join(ref_dir, "*2m*.wav"))
         if candidates:
             ref_2m = candidates[0]
-
+            print(f"Found 2m reference: {os.path.basename(ref_2m)}")
         else:
-
+            print("No reference found for 2m!")
             return
     else:
+        print(f"Found 2m reference: {os.path.basename(ref_2m)}")
 
-
-        pass
     if not os.path.exists(ref_5m):
         candidates = glob.glob(os.path.join(ref_dir, "*5m*.wav"))
         if candidates:
             ref_5m = candidates[0]
-
+            print(f"Found 5m reference: {os.path.basename(ref_5m)}")
         else:
-
+            print("No reference found for 5m!")
             return
     else:
+        print(f"Found 5m reference: {os.path.basename(ref_5m)}")
 
-
-        pass
+    print()
     inspect_reference(ref_2m, "2m")
     inspect_reference(ref_5m, "5m")
-
+    print()
 
     all_wavs = glob.glob(os.path.join(rec_dir, "*.wav"))
 
@@ -408,76 +414,77 @@ def main():
     recordings_2m.sort()
     recordings_5m.sort()
 
-
+    print(f"\nFound {len(recordings_2m)} recordings for 2m:")
     for r in recordings_2m:
-
-
-        pass
+        print(f"   - {os.path.basename(r)}")
+    print(f"Found {len(recordings_5m)} recordings for 5m:")
     for r in recordings_5m:
+        print(f"   - {os.path.basename(r)}")
 
-
-        pass
     if recordings_2m:
-
+        print("\n--- Processing 2m ---")
         ir_list = []
         quality_list = []
         for rec in recordings_2m:
-
+            print(f"  -> Deconvolution: {os.path.basename(rec)}")
             ir, fs, quality = deconvolve(rec, ref_2m, debug=True)
             ir_list.append(ir)
             quality_list.append(quality)
 
-
+        print("  [DEBUG] Per-file DRR (individual recordings, diagnostic only):")
         for rec, ir in zip(recordings_2m, ir_list):
             drr_individual, peak_individual = calculate_drr(ir, fs, debug=True)
-
+            print(f"  [DEBUG]   {os.path.basename(rec)}: DRR={drr_individual:.2f} dB "
+                  f"(peak at {peak_individual*1000:.2f} ms)")
 
         avg_ir_2m = align_and_average(ir_list, fs, quality_list=quality_list, debug=True)
         if avg_ir_2m is not None:
             drr_2m, peak_2m = calculate_drr(avg_ir_2m, fs)
-
+            print(f"Averaged DRR for 2m: {drr_2m:.2f} dB (peak at {peak_2m:.4f} s)")
 
             out_ir_path = os.path.join(rec_dir, "averaged_IR_2m.wav")
             sf.write(out_ir_path, avg_ir_2m.astype(np.float32), fs)
-
+            print(f"   Saved IR: {out_ir_path}")
 
             out_plot_path = os.path.join(rec_dir, "plot_IR_2m.png")
             plot_ir(avg_ir_2m, fs, drr_2m, "2m", save_path=out_plot_path)
-
+            print(f"   Saved plot: {out_plot_path}")
     else:
+        print("\nNo recordings for 2m.")
 
-
-        pass
     if recordings_5m:
-
+        print("\n--- Processing 5m ---")
         ir_list = []
         quality_list = []
         for rec in recordings_5m:
-
+            print(f"  -> Deconvolution: {os.path.basename(rec)}")
             ir, fs, quality = deconvolve(rec, ref_5m, debug=True)
             ir_list.append(ir)
             quality_list.append(quality)
 
-
+        print("  [DEBUG] Per-file DRR (individual recordings, diagnostic only):")
         for rec, ir in zip(recordings_5m, ir_list):
             drr_individual, peak_individual = calculate_drr(ir, fs, debug=True)
-
+            print(f"  [DEBUG]   {os.path.basename(rec)}: DRR={drr_individual:.2f} dB "
+                  f"(peak at {peak_individual*1000:.2f} ms)")
 
         avg_ir_5m = align_and_average(ir_list, fs, quality_list=quality_list, debug=True)
         if avg_ir_5m is not None:
             drr_5m, peak_5m = calculate_drr(avg_ir_5m, fs)
-
+            print(f"Averaged DRR for 5m: {drr_5m:.2f} dB (peak at {peak_5m:.4f} s)")
 
             out_ir_path = os.path.join(rec_dir, "averaged_IR_5m.wav")
             sf.write(out_ir_path, avg_ir_5m.astype(np.float32), fs)
-
+            print(f"   Saved IR: {out_ir_path}")
 
             out_plot_path = os.path.join(rec_dir, "plot_IR_5m.png")
             plot_ir(avg_ir_5m, fs, drr_5m, "5m", save_path=out_plot_path)
-
+            print(f"   Saved plot: {out_plot_path}")
     else:
+        print("\nNo recordings for 5m.")
+
+    print("\nDone! All results saved in the 'measurement_scenes/recorded_RIR' folder.")
 
 
-        pass
 if __name__ == "__main__":
     main()

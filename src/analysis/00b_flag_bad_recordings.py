@@ -6,7 +6,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import config as cfg              
+import config as cfg  # noqa: E402
 
 IN_PATH = cfg.STATS_PATH / 'raw_noise_check.csv'
 
@@ -67,11 +67,11 @@ def flag_recordings(df: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     if not IN_PATH.exists():
-
+        print(f"ERROR: {IN_PATH} not found. Run 00a_raw_noise_check.py first.")
         sys.exit(1)
 
     df = pd.read_csv(IN_PATH)
-
+    print(f"Loaded {len(df)} participant x block rows from {IN_PATH.name}")
 
     flagged = flag_recordings(df)
     excluded = flagged[flagged['excluded']].copy()
@@ -85,13 +85,20 @@ def main():
     cfg.STATS_PATH.mkdir(parents=True, exist_ok=True)
     excluded_out.to_csv(cfg.EXCLUDED_RECORDINGS_PATH, index=False)
 
-
+    print(f"\nSaved: {cfg.EXCLUDED_RECORDINGS_PATH}")
+    print(f"\n--- SUMMARY ---")
+    print(f"Thresholds: rms_ratio > {cfg.RISING_NOISE_RMS_RATIO_THRESHOLD}, "
+          f"|power_z| > {cfg.SIGNAL_POWER_ROBUST_Z_THRESHOLD}, "
+          f"flat_rel_std < {cfg.FLAT_RMS_REL_STD_THRESHOLD}")
+    print(f"Excluded: {len(excluded_out)} / {len(df)} recordings")
     if len(excluded_out):
-
-        pass
+        print("\n" + excluded_out.to_string(index=False))
     else:
+        print("No recordings met any exclusion criterion.")
+
+    print(f"\nDownstream scripts will skip these participant/block combinations "
+          f"via config.is_excluded().")
 
 
-        pass
 if __name__ == '__main__':
     main()

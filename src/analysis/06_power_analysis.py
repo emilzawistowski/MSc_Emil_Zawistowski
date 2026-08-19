@@ -183,7 +183,7 @@ def main() -> None:
     with open(out_txt, "w", encoding="utf-8") as f:
         f.write(report)
     log.info("Saved: %s", out_txt)
-
+    print("\n" + report)
 
     log.info("=" * 60)
     log.info("07_power_analysis.py -- FINISHED SUCCESSFULLY")

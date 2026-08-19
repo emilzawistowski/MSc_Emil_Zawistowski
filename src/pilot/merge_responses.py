@@ -14,7 +14,7 @@ from scipy.stats import binomtest
 
 def main():
     if len(sys.argv) != 3:
-
+        print("Usage: python src/pilot/merge_responses.py <session_log.csv> <subject_responses.csv>")
         sys.exit(1)
 
     session_log_path, responses_path = sys.argv[1], sys.argv[2]
@@ -23,9 +23,10 @@ def main():
     responses = pd.read_csv(responses_path)
 
     if len(session_log) != len(responses):
+        print(f"WARNING: number of trials in log ({len(session_log)}) != number "
+              f"of responses ({len(responses)}). Check if the subject skipped "
+              f"or duplicated a row.")
 
-
-        pass
     merged = session_log.merge(responses, on="trial", how="left")
     merged["response"] = merged["response"].astype(str).str.strip()
     merged["correct_response"] = merged["correct_response"].astype(str).str.strip()
@@ -38,6 +39,12 @@ def main():
     n_correct = merged["correct"].sum()
     pct = 100 * n_correct / n
     test = binomtest(int(n_correct), n, 0.5, alternative="greater")
+
+    print(merged[["trial", "distance_1", "distance_2", "correct_response",
+                  "response", "correct"]].to_string(index=False))
+    print(f"\nResult: {n_correct}/{n} correct ({pct:.1f}%)")
+    print(f"Binomial test vs. 50% chance: p = {test.pvalue:.4g}")
+    print(f"Merged data saved to: {out_path}")
 
 
 if __name__ == "__main__":

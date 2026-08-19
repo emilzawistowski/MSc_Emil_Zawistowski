@@ -15,8 +15,8 @@ CAL_DISTANCES   = [2.0, 5.0]
 N_REPEATS       = 10
 SOA             = 2.0
 CLICK_DUR       = 0.005
-LEAD_SILENCE    = 1.0                                                        
-GAP_BETWEEN     = 3.0                                                      
+LEAD_SILENCE    = 1.0     # silence before the first click of the whole scene
+GAP_BETWEEN     = 3.0     # silence between the 2 m block and the 5 m block
 TRIGGER_CODES   = {2.0: 202, 5.0: 205}
 
 def make_click(fs, duration=CLICK_DUR, freq=1000.0):
@@ -55,7 +55,7 @@ def main():
     array = build_square_array(N_PER_WALL, SPACING, WALL_DIST)
     click = make_click(FS)
 
-
+    # --- Step 1: for each distance, determine the reference channel and prepare click blocks ---
     blocks = []
     cursor_time = LEAD_SILENCE
     metadata = {'fs': FS, 'soa_s': SOA, 'distances': {}, 'trials': []}
@@ -63,8 +63,8 @@ def main():
     for dist in CAL_DISTANCES:
         source_pos = azimuth_to_cartesian(TARGET_AZIMUTH, dist)
         ref_idx, theoretical_delay_s = pick_reference_channel(source_pos, array)
-
-
+        print(f"Distance {dist} m -> reference channel = {ref_idx}, "
+              f"theoretical WFS delay = {theoretical_delay_s*1000:.3f} ms")
         metadata['distances'][str(dist)] = {
             'reference_channel': ref_idx,
             'reference_channel_wfs_delay_s': theoretical_delay_s,
@@ -85,15 +85,15 @@ def main():
         blocks.append((dist, source_pos, ref_idx, block_trials))
         metadata['trials'].extend(block_trials)
 
-
+        # next block starts after the last click of this block + pause
         cursor_time = block_trials[-1]['onset_time_s'] + SOA + GAP_BETWEEN
 
-    total_duration = cursor_time + 0.5                    
+    total_duration = cursor_time + 0.5   # trailing margin
     total_samples = int(total_duration * FS)
     n_speakers = len(array.x)
     audio_mix = np.zeros((n_speakers, total_samples))
 
-
+    # --- Step 2: render each click on the appropriate reference channel ---
     for dist, source_pos, ref_idx, block_trials in blocks:
         for trial in block_trials:
             driving = render_single_channel_click(click, FS, source_pos, array, ref_idx)
@@ -108,6 +108,9 @@ def main():
     with open(json_path, 'w') as f:
         json.dump(metadata, f, indent=2)
 
+    print(f"\n{wav_path}  (total duration {total_duration:.1f} s)")
+    print(f"{json_path}")
+    print(f"\nRecord at least {total_duration + 3:.0f} s, with extra margin at the start.")
 
 if __name__ == '__main__':
     main()

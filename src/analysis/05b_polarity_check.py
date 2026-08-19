@@ -76,7 +76,7 @@ def main() -> None:
                 evk_dev = epochs_dev.average()
                 mmn_car = mne.combine_evoked([evk_dev, evk_std], weights=[1, -1])
                 mmn_car.comment = f"{p}_mmn_{block}"
-            except Exception as exc:                
+            except Exception as exc:  # noqa: BLE001
                 log.error("combine_evoked failed for %s block %s: %s", p, block, exc)
                 continue
 
@@ -178,7 +178,7 @@ def main() -> None:
     with open(OUT_TXT, "w", encoding="utf-8") as f:
         f.write(report)
     log.info("Saved: %s", OUT_TXT)
-
+    print("\n" + report)
 
     log.info("=" * 60)
     log.info("05b_mastoid_polarity_check.py -- FINISHED SUCCESSFULLY")

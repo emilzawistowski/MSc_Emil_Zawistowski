@@ -10,7 +10,7 @@ import shutil
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import config as cfg              
+import config as cfg  # noqa: E402
 
 warnings.filterwarnings('ignore', category=RuntimeWarning)
 mne.set_log_level('ERROR')
@@ -33,8 +33,7 @@ def _read_internal_filenames(vhdr_path: Path) -> dict:
                 if result['eeg'] and result['vmrk']:
                     break
     except OSError as e:
-
-        pass
+        print(f"    WARNING: Could not read header from {vhdr_path.name}: {e}")
     return result
 
 
@@ -150,12 +149,12 @@ def main():
             vhdr = files_dict.get('vhdr')
             if vhdr is None:
                 continue
-
+            print(f"{participant_id} block {block_type}: {vhdr.name}")
             try:
                 tmp_vhdr = copy_files_to_tmp(files_dict, TMP_DIR)
                 raw = mne.io.read_raw_brainvision(str(tmp_vhdr), preload=True, verbose=False)
             except Exception as e:
-
+                print(f"  ERROR loading: {e}")
                 continue
             finally:
                 cleanup_tmp(TMP_DIR, vhdr.name)
@@ -168,33 +167,31 @@ def main():
     df = pd.DataFrame(rows)
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(OUT_PATH, index=False)
-
+    print(f"\nSaved: {OUT_PATH}")
 
     if df.empty:
-
+        print("\nNo files were loaded correctly - check errors above.")
         return
 
-
+    print("\n--- SUMMARY ---")
     high_line = df[df['line_ratio_50hz_vs_neighbor'] > 3]
-
+    print(f"Files with visible 50Hz peak in raw data (ratio>3): {len(high_line)} / {len(df)}")
 
     with_unexplained = df[df['unexplained_narrow_peaks_hz'] != ""]
-
+    print(f"Files with unexplained narrow peaks (not 50/100/150Hz): {len(with_unexplained)} / {len(df)}")
     for _, r in with_unexplained.iterrows():
+        print(f"  -> {r['participant']} block {r['block']}: {r['unexplained_narrow_peaks_hz']} Hz")
 
-
-        pass
     rising_noise = df[df['rms_last_vs_first_ratio'] > 1.5]
-
+    print(f"\nFiles with RMS increase >50% in the second half of the recording: {len(rising_noise)} / {len(df)}")
     for _, r in rising_noise.iterrows():
+        print(f"  -> {r['participant']} block {r['block']}: ratio={r['rms_last_vs_first_ratio']:.2f}")
 
-
-        pass
     high_dc = df.sort_values('dc_drift_power_0.1_0.5hz', ascending=False).head(5)
-
+    print(f"\nTop 5 recordings with highest DC drift (0.1-0.5Hz):")
     for _, r in high_dc.iterrows():
+        print(f"  -> {r['participant']} block {r['block']}: {r['dc_drift_power_0.1_0.5hz']:.3e}")
 
 
-        pass
 if __name__ == '__main__':
     main()

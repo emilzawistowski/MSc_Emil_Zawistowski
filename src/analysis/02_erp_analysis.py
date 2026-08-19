@@ -24,13 +24,13 @@ log = logging.getLogger(__name__)
 
 mne.set_log_level("WARNING")
 
-
+# Wong 2011 colorblind-friendly palette
 COLORS = {
-    "std_A":   "#0072B2",         
-    "dev_A":   "#D55E00",               
-    "std_B":   "#009E73",          
-    "dev_B":   "#CC79A7",         
-    "ctrl_C":  "#E69F00",           
+    "std_A":   "#0072B2",   # blue
+    "dev_A":   "#D55E00",   # red-orange
+    "std_B":   "#009E73",   # green
+    "dev_B":   "#CC79A7",   # pink
+    "ctrl_C":  "#E69F00",   # yellow
     "mmn_A":   "#D55E00",
     "mmn_B":   "#0072B2",
     "ssa_AC":  "#D55E00",
@@ -57,7 +57,7 @@ def load_epochs(participant: str, block: str, condition: str) -> mne.Epochs | No
     except FileNotFoundError:
         log.warning("File missing: %s – skipping participant.", fname.name)
         return None
-    except Exception as exc:                
+    except Exception as exc:  # noqa: BLE001
         log.error("Error while loading %s: %s", fname.name, exc)
         return None
 
@@ -70,7 +70,7 @@ def safe_average(epochs: mne.Epochs | None, label: str = "") -> mne.Evoked | Non
         evoked = epochs.average()
         evoked.comment = label
         return evoked
-    except Exception as exc:                
+    except Exception as exc:  # noqa: BLE001
         log.error("Error in .average() for '%s': %s", label, exc)
         return None
 
@@ -94,9 +94,9 @@ def extract_mean_amplitude(
             log.warning("None of the channels %s found.", picks)
             return np.nan
 
-        data = evoked.data[ch_indices][:, mask]                              
-        return float(np.mean(data) * 1e6)                  
-    except Exception as exc:                
+        data = evoked.data[ch_indices][:, mask]   # shape: (n_picks, n_times)
+        return float(np.mean(data) * 1e6)          # V → µV
+    except Exception as exc:  # noqa: BLE001
         log.error("extract_mean_amplitude error: %s", exc)
         return np.nan
 
@@ -143,8 +143,8 @@ def compute_fal(
         ])
         idx = np.searchsorted(cumulative, fraction * total_area)
         idx = min(idx, len(times[mask]) - 1)
-        return float(times[mask][idx] * 1e3)           
-    except Exception as exc:                
+        return float(times[mask][idx] * 1e3)   # s → ms
+    except Exception as exc:  # noqa: BLE001
         log.error("compute_fal error (%s): %s", ch_name, exc)
         return np.nan
 
@@ -200,7 +200,7 @@ def _sem_shade(
         sem = signals.std(axis=0, ddof=1) / np.sqrt(len(signals))
         mean = signals.mean(axis=0)
         ax.fill_between(times_ms, mean - sem, mean + sem, alpha=ALPHA_SHADE, color=color)
-    except Exception as exc:                
+    except Exception as exc:  # noqa: BLE001
         log.warning("_sem_shade error: %s", exc)
 
 
@@ -290,7 +290,7 @@ def plot_mmn_difference_waves(
 def _sphere_covering_all_channels(info: mne.Info, margin: float = 1.03) -> tuple:
     """Explicit (x, y, z, radius) sphere for plot_topomap, sized to cover
     the most eccentric channel, unlike MNE's default sphere='auto' fit."""
-    pos = np.array([ch['loc'][:3] for ch in info['chs'] if ch['kind'] == 2])                
+    pos = np.array([ch['loc'][:3] for ch in info['chs'] if ch['kind'] == 2])  # FIFFV_EEG_CH
     center_xy = pos[:, :2].mean(axis=0)
     radii = np.sqrt(((pos[:, :2] - center_xy) ** 2).sum(axis=1))
     r = float(radii.max()) * margin
@@ -327,7 +327,7 @@ def plot_topomap_mmn(
         fig.savefig(out, dpi=300, bbox_inches='tight', pad_inches=0.15)
         plt.close(fig)
         log.info("Saved: %s", out)
-    except Exception as exc:                
+    except Exception as exc:  # noqa: BLE001
         log.error("plot_topomap_mmn_%s error: %s", block, exc)
 
 
@@ -395,7 +395,7 @@ def plot_topomap_mmn_combined(
             plt.close(fig)
             tmp_paths.append(tmp_out)
             labels.append(f"Block {key}")
-        except Exception as exc:                
+        except Exception as exc:  # noqa: BLE001
             log.error("plot_topomap_mmn_combined block %s: %s", key, exc)
 
     if not tmp_paths:
@@ -440,7 +440,7 @@ def plot_topomap_p3a(
             fig.savefig(out, dpi=300, bbox_inches='tight', pad_inches=0.15)
             plt.close(fig)
             log.info("Saved: %s", out)
-        except Exception as exc:                
+        except Exception as exc:  # noqa: BLE001
             log.error("plot_topomap_p3a_%s error: %s", key, exc)
 
 
@@ -478,7 +478,7 @@ def plot_topomap_p3a_combined(
             plt.close(fig)
             tmp_paths.append(tmp_out)
             labels.append(f"Block {key}")
-        except Exception as exc:                
+        except Exception as exc:  # noqa: BLE001
             log.error("plot_topomap_p3a_combined block %s: %s", key, exc)
 
     if not tmp_paths:
@@ -502,7 +502,8 @@ def plot_ssa_control(
     """Figure e): SSA control – diff_A_vs_C and diff_B_vs_C."""
     fig, ax = plt.subplots(figsize=(10, 4))
 
-
+    # See plot_mmn_difference_waves for why times_ms is taken explicitly
+    # from the first available evoked instead of the last loop iteration.
     _ref_ga = next((g for g in (ga_ssa_AC, ga_ssa_BC) if g is not None), None)
     times_ms = _ref_ga.times * 1e3 if _ref_ga is not None else None
 
@@ -575,8 +576,9 @@ def plot_individual_erps(
         ax.axvline(0, color="k", lw=0.6, ls="--")
         ax.set_xlabel("Time [ms]")
         ax.set_ylabel("Amplitude [µV]")
-
-
+        # No descriptive title on the figure itself — participant ID and
+        # channel go in the LaTeX \caption{} instead, per thesis figure
+        # convention (avoids duplicating the caption inside the image).
         ax.legend(fontsize=8)
         ax.invert_yaxis()
         fig.tight_layout()
@@ -603,19 +605,19 @@ def main() -> None:
     for p in participants:
         log.info("--- Participant: %s ---", p)
 
-
+        # Block A
         epochs_std_A = load_epochs(p, "A", "std")
         epochs_dev_A = load_epochs(p, "A", "dev")
         erp[p]["std_A"] = safe_average(epochs_std_A, f"{p}_std_A")
         erp[p]["dev_A"] = safe_average(epochs_dev_A, f"{p}_dev_A")
 
-
+        # Block B
         epochs_std_B = load_epochs(p, "B", "std")
         epochs_dev_B = load_epochs(p, "B", "dev")
         erp[p]["std_B"] = safe_average(epochs_std_B, f"{p}_std_B")
         erp[p]["dev_B"] = safe_average(epochs_dev_B, f"{p}_dev_B")
 
-
+        # Block C (control)
         epochs_ctrl_C = load_epochs(p, "C", "std")
         erp[p]["ctrl_C"] = safe_average(epochs_ctrl_C, f"{p}_ctrl_C")
 
@@ -631,53 +633,53 @@ def main() -> None:
     ssa_BC_per_p:  dict[str, mne.Evoked | None] = {}
 
     for p in participants:
-
+        # MMN_A = dev_A – std_A
         if erp[p]["dev_A"] is not None and erp[p]["std_A"] is not None:
             try:
                 mmn_per_p[p] = mne.combine_evoked(
                     [erp[p]["dev_A"], erp[p]["std_A"]], weights=[1, -1]
                 )
                 mmn_per_p[p].comment = f"{p}_mmn_A"
-            except Exception as exc:                
+            except Exception as exc:  # noqa: BLE001
                 log.error("MMN_A combine_evoked %s: %s", p, exc)
                 mmn_per_p[p] = None
         else:
             mmn_per_p[p] = None
 
-
+        # MMN_B = dev_B – std_B
         if erp[p]["dev_B"] is not None and erp[p]["std_B"] is not None:
             try:
                 mmn_B_per_p[p] = mne.combine_evoked(
                     [erp[p]["dev_B"], erp[p]["std_B"]], weights=[1, -1]
                 )
                 mmn_B_per_p[p].comment = f"{p}_mmn_B"
-            except Exception as exc:                
+            except Exception as exc:  # noqa: BLE001
                 log.error("MMN_B combine_evoked %s: %s", p, exc)
                 mmn_B_per_p[p] = None
         else:
             mmn_B_per_p[p] = None
 
-
+        # SSA control A vs C = dev_A – ctrl_C
         if erp[p]["dev_A"] is not None and erp[p]["ctrl_C"] is not None:
             try:
                 ssa_AC_per_p[p] = mne.combine_evoked(
                     [erp[p]["dev_A"], erp[p]["ctrl_C"]], weights=[1, -1]
                 )
                 ssa_AC_per_p[p].comment = f"{p}_ssa_AC"
-            except Exception as exc:                
+            except Exception as exc:  # noqa: BLE001
                 log.error("SSA_AC combine_evoked %s: %s", p, exc)
                 ssa_AC_per_p[p] = None
         else:
             ssa_AC_per_p[p] = None
 
-
+        # SSA control B vs C = dev_B – ctrl_C
         if erp[p]["dev_B"] is not None and erp[p]["ctrl_C"] is not None:
             try:
                 ssa_BC_per_p[p] = mne.combine_evoked(
                     [erp[p]["dev_B"], erp[p]["ctrl_C"]], weights=[1, -1]
                 )
                 ssa_BC_per_p[p].comment = f"{p}_ssa_BC"
-            except Exception as exc:                
+            except Exception as exc:  # noqa: BLE001
                 log.error("SSA_BC combine_evoked %s: %s", p, exc)
                 ssa_BC_per_p[p] = None
         else:
@@ -715,28 +717,28 @@ def main() -> None:
 
         row = {
             "participant":        p,
-
+            # MMN amplitudes (Fz)
             "mmn_A_amp_Fz":       _amp(mmn_A_e,  config.MMN_TMIN, config.MMN_TMAX, [fz_ch]),
             "mmn_B_amp_Fz":       _amp(mmn_B_e,  config.MMN_TMIN, config.MMN_TMAX, [fz_ch]),
-
+            # MMN amplitudes (ROI)
             "mmn_A_amp_ROI":      _amp(mmn_A_e,  config.MMN_TMIN, config.MMN_TMAX, config.ROI_MMN),
             "mmn_B_amp_ROI":      _amp(mmn_B_e,  config.MMN_TMIN, config.MMN_TMAX, config.ROI_MMN),
-
+            # MMN FAL
             "mmn_A_fal_ms":       _fal(mmn_A_e,  config.MMN_LATENCY_TMIN, config.MMN_LATENCY_TMAX, fz_ch, "negative"),
             "mmn_B_fal_ms":       _fal(mmn_B_e,  config.MMN_LATENCY_TMIN, config.MMN_LATENCY_TMAX, fz_ch, "negative"),
-
-
+            # P3a computed on the deviant-minus-standard difference wave (H3);
+            # Cz used in place of FCz, which is not in this montage/ROI.
             "p3a_A_amp_Cz":       _amp(mmn_A_e,  config.P3A_TMIN, config.P3A_TMAX, [cz_ch]),
             "p3a_B_amp_Cz":       _amp(mmn_B_e,  config.P3A_TMIN, config.P3A_TMAX, [cz_ch]),
             "p3a_A_amp_ROI":      _amp(mmn_A_e,  config.P3A_TMIN, config.P3A_TMAX, config.ROI_P3A),
             "p3a_B_amp_ROI":      _amp(mmn_B_e,  config.P3A_TMIN, config.P3A_TMAX, config.ROI_P3A),
-
+            # P3a FAL
             "p3a_A_fal_ms":       _fal(mmn_A_e,  config.P3A_TMIN, config.P3A_TMAX, cz_ch, "positive"),
             "p3a_B_fal_ms":       _fal(mmn_B_e,  config.P3A_TMIN, config.P3A_TMAX, cz_ch, "positive"),
-
+            # SSA control
             "ssa_AC_amp_Fz":      _amp(ssa_AC_e, config.MMN_TMIN, config.MMN_TMAX, [fz_ch]),
             "ssa_BC_amp_Fz":      _amp(ssa_BC_e, config.MMN_TMIN, config.MMN_TMAX, [fz_ch]),
-
+            # Number of epochs
             "n_trials_std_A":     erp[p]["_n_std_A"],
             "n_trials_dev_A":     erp[p]["_n_dev_A"],
             "n_trials_std_B":     erp[p]["_n_std_B"],
@@ -765,33 +767,33 @@ def main() -> None:
         "ctrl_C": [erp[p]["ctrl_C"] for p in participants if erp[p]["ctrl_C"] is not None],
     }
 
-
+    # a) Grand average of all conditions
     plot_grand_avg_all_conditions(ga_all, sem_all)
 
-
+    # b) MMN difference waves
     plot_mmn_difference_waves(
         ga_mmn_A, ga_mmn_B,
         [mmn_per_p[p] for p in participants if mmn_per_p.get(p) is not None],
         [mmn_B_per_p[p] for p in participants if mmn_B_per_p.get(p) is not None],
     )
 
-
+    # c) MMN topomaps
     plot_topomap_mmn(ga_mmn_A, "A")
     plot_topomap_mmn(ga_mmn_B, "B")
     plot_topomap_mmn_combined(ga_mmn_A, ga_mmn_B)
 
-
+    # d) P3a topomaps
     plot_topomap_p3a(ga_mmn_A, ga_mmn_B)
     plot_topomap_p3a_combined(ga_mmn_A, ga_mmn_B)
 
-
+    # e) SSA control
     plot_ssa_control(
         ga_ssa_AC, ga_ssa_BC,
         [ssa_AC_per_p[p] for p in participants if ssa_AC_per_p.get(p) is not None],
         [ssa_BC_per_p[p] for p in participants if ssa_BC_per_p.get(p) is not None],
     )
 
-
+    # f) Individual ERPs
     plot_individual_erps(
         {p: {k: erp[p][k] for k in ["std_A", "dev_A", "std_B", "dev_B", "ctrl_C"]} for p in participants}
     )
