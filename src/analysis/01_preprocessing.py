@@ -196,14 +196,11 @@ def detect_and_fix_bridges(raw: mne.io.Raw) -> list[tuple[str, str]]:
 
 def detect_bad_channels(raw: mne.io.Raw, interpolate: bool = True) -> tuple[list[str], dict]:
     """Flags bad channels by extreme variance and by correlation with the
-    rest of the montage that is a robust outlier relative to the montage
-    itself (not a fixed threshold, since spatially distant electrodes on a
-    sparse 32-ch montage naturally correlate weakly).
-
-    Returns (bad_channels, review_info); review_info flags cases where more
-    than MAX_BAD_CH_FRACTION of channels were detected, in which case the
-    list is truncated to the worst channels and manual review is required.
-    """
+    rest of the montage (robust z relative to the montage, not a fixed
+    threshold, since distant electrodes on this sparse 32-ch cap naturally
+    correlate weakly). Returns (bad_channels, review_info); review_info
+    flags cases above MAX_BAD_CH_FRACTION, where the list is truncated and
+    manual review is required."""
     print("  [3.5] Bad channel detection...")
 
     MAX_BAD_CH_FRACTION = 0.25
@@ -321,12 +318,9 @@ def run_ica(raw: mne.io.Raw,
             random_state: int = cfg.RANDOM_STATE,
             n_components_override: int | None = None,
             exclude_from_fit: list[str] | None = None) -> mne.preprocessing.ICA:
-    """
-    n_components_override: used instead of cfg.N_ICA_COMPONENTS when bad
-        channels were interpolated (reduce_ica_components strategy).
-    exclude_from_fit: channels to leave out of the ICA fit entirely
-        (ica_before_interpolate strategy).
-    """
+    """n_components_override overrides cfg.N_ICA_COMPONENTS (used by the
+    reduce_ica_components strategy). exclude_from_fit lists channels left
+    out of the fit entirely (used by ica_before_interpolate)."""
     n_components = n_components_override if n_components_override is not None else cfg.N_ICA_COMPONENTS
 
     raw_for_ica = raw.copy().filter(1.0, None, picks='eeg', fir_window='hamming')

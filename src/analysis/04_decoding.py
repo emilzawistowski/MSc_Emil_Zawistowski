@@ -1,40 +1,9 @@
-# =============================================================================
-# 02_decoding.py  –  Single-trial MVPA / temporal decoding (MMN, WFS auditory
-#                     distance study)
-# Project: MSc Emil Zawistowski
+# Single-trial MVPA temporal decoding: looming (Block A deviant, near/2 m)
+# vs. receding (Block B deviant, far/5 m), linear SVM + SlidingEstimator,
+# 5-fold StratifiedKFold, ROC-AUC. Decoding window: config.MMN_LATENCY_TMIN/
+# TMAX (~100-280 ms). Reads *_epo.fif from 01_preprocessing.py.
 #
-# GOAL
-# ----
-# Decode "looming" (Block A deviant, near/2 m) vs. "receding" (Block B
-# deviant, far/5 m) single-trial EEG epochs using a linear SVM combined with
-# mne.decoding.SlidingEstimator (temporal generalisation across time points),
-# evaluated with 5-fold StratifiedKFold cross-validation and ROC-AUC.
-#
-# This script is designed to slot directly into the existing pipeline:
-#   - reads *_epo.fif files produced by 01_preprocessing.py
-#     (naming convention: {PID}_block{A|B}_{std|dev}_epo.fif)
-#   - reuses paths/parameters from analysis/config.py
-#   - restricts decoding to the MMN time window (config.MMN_LATENCY_TMIN /
-#     MMN_LATENCY_TMAX, i.e. ~100-280 ms) as requested (100-250 ms MMN window)
-#   - is robust to missing files/participants (skips with a warning, never
-#     crashes the group-level loop)
-#   - saves per-participant and group-level results (.npy / .json) plus a
-#     publication-style figure (accuracy/AUC over time, mean +/- SEM, cluster
-#     of participants overlaid, chance level, significance shading).
-#
-# USAGE
-# -----
-#   python 02_decoding.py                  # run for all cfg.PARTICIPANTS
-#   python 02_decoding.py --participants P01 P02
-#   python 02_decoding.py --n-jobs 4
-#
-# OUTPUT
-# ------
-#   results/tables/decoding/{PID}_looming_vs_receding_scores.npy
-#   results/tables/decoding/group_decoding_scores.npy
-#   results/tables/decoding/group_decoding_summary.json
-#   results/figures/decoding/group_temporal_decoding.png
-# =============================================================================
+# Usage: python 04_decoding.py [--participants P01 P02 ...] [--n-jobs N]
 
 import sys
 import json
@@ -64,20 +33,14 @@ import config as cfg
 mne.set_log_level('WARNING')
 
 
-# =============================================================================
-# 0. DECODING-SPECIFIC PARAMETERS
-# =============================================================================
+# --- Decoding-specific parameters ---
 
-# Two classes being decoded: looming (Block A deviant, near/2 m) vs.
-# receding (Block B deviant, far/5 m). Both are the *deviant* (oddball)
-# epochs of their respective block, i.e. the physically-changing sound.
+# Both classes are the deviant (oddball) epochs of their block.
 CLASS_A_LABEL = 'looming'     # Block A deviant  (S 12, 2 m / near)
 CLASS_B_LABEL = 'receding'    # Block B deviant  (S 22, 5 m / far)
 
-# Decoding time window: use the wider MMN latency window from config
-# (100-280 ms) which comfortably covers the requested 100-250 ms range,
-# and is already defined centrally so windows stay consistent across the
-# whole pipeline. Set DECODE_TMIN/TMAX to None to use the full epoch instead.
+# Decoding window: MMN latency window from config (100-280 ms). Set
+# DECODE_TMIN/TMAX to None to use the full epoch instead.
 DECODE_TMIN = cfg.MMN_LATENCY_TMIN  
 DECODE_TMAX = cfg.MMN_LATENCY_TMAX
 
@@ -95,9 +58,7 @@ DECODING_TABLE_PATH  = cfg.STATS_PATH / 'decoding'
 DECODING_FIGURE_PATH = cfg.FIGURES_DECODING_PATH
 
 
-# =============================================================================
-# 1. HELPERS
-# =============================================================================
+# --- 1. HELPERS ---
 
 def _to_python(obj):
     """Recursively convert numpy scalars/arrays to built-in Python types
@@ -190,9 +151,7 @@ def load_looming_receding_epochs(participant_id: str) -> mne.Epochs | None:
     return epochs
 
 
-# =============================================================================
-# 2. SINGLE-PARTICIPANT TEMPORAL DECODING
-# =============================================================================
+# --- 2. SINGLE-PARTICIPANT TEMPORAL DECODING ---
 
 def decode_participant(epochs: mne.Epochs,
                         n_jobs: int = N_JOBS) -> dict:
@@ -271,9 +230,7 @@ def decode_participant(epochs: mne.Epochs,
         return None
 
 
-# =============================================================================
-# 3. GROUP-LEVEL STATISTICS
-# =============================================================================
+# --- 3. GROUP-LEVEL STATISTICS ---
 
 def group_level_stats(all_mean_scores: np.ndarray, times: np.ndarray) -> dict:
     """
@@ -332,9 +289,7 @@ def group_level_stats(all_mean_scores: np.ndarray, times: np.ndarray) -> dict:
     }
 
 
-# =============================================================================
-# 4. VISUALISATION
-# =============================================================================
+# --- 4. VISUALISATION ---
 
 def plot_group_decoding(times: np.ndarray,
                          all_mean_scores: np.ndarray,
@@ -392,9 +347,7 @@ def plot_group_decoding(times: np.ndarray,
     print(f"\n  Figure saved: {out_path}")
 
 
-# =============================================================================
-# 5. MAIN PIPELINE
-# =============================================================================
+# --- 5. MAIN PIPELINE ---
 
 def run_decoding(participants: list[str], n_jobs: int = N_JOBS) -> None:
     DECODING_TABLE_PATH.mkdir(parents=True, exist_ok=True)
@@ -496,9 +449,7 @@ def run_decoding(participants: list[str], n_jobs: int = N_JOBS) -> None:
     print("=" * 70)
 
 
-# =============================================================================
-# ENTRY POINT
-# =============================================================================
+# --- ENTRY POINT ---
 
 def main():
     parser = argparse.ArgumentParser(

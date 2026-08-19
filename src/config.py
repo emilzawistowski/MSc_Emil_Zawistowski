@@ -85,38 +85,17 @@ N_ICA_COMPONENTS = 25
 RANDOM_STATE = 42
 
 # ---------------------------------------------------------------------------
-# 3a. ICA vs. BAD-CHANNEL-INTERPOLATION ORDERING
+# 3a. ICA vs. bad-channel interpolation ordering
 # ---------------------------------------------------------------------------
-# Interpolating a bad channel makes it a linear combination of its
-# neighbours - it adds no new degree of freedom. If interpolation happens
-# BEFORE ICA (the default below), fitting ICA with N_ICA_COMPONENTS=25 on
-# data that effectively has fewer independent dimensions can produce an
-# unstable/rank-deficient mixing matrix (seen as an MNE RuntimeWarning in
-# ~11/60 blocks in the run of 2026-08-11, all blocks where >=8 channels were
-# interpolated). Three strategies, chosen here so they can be A/B compared
-# without duplicating pipeline code:
+# Interpolating bad channels before fitting ICA reduces the effective rank
+# of the data, which caused rank-deficiency warnings in several blocks
+# (mainly ones with many interpolated channels). Fitting ICA on the good
+# channels only, then interpolating afterwards, avoids this and is the
+# standard fix recommended in the EEG literature.
 #
-#   'interpolate_before_ica' (ORIGINAL/DEFAULT): current behaviour, unchanged.
-#       Bad channels are interpolated first, then ICA is fit with the full
-#       N_ICA_COMPONENTS. Simple, but can trigger the rank-deficiency warning
-#       when many channels are interpolated.
-#
-#   'ica_before_interpolate' (VARIANT A): bad channels are detected but NOT
-#       interpolated yet. ICA is fit only on the still-good channels (bad
-#       ones excluded from the fit entirely), then applied - then bad
-#       channels are interpolated afterwards, using the now ICA-cleaned good
-#       channels as the interpolation source. Standard recommendation in the
-#       EEG literature for this exact problem; avoids rank deficiency by
-#       construction. Costs a small amount of code complexity and changes
-#       every downstream .fif file (needs a full pipeline re-run).
-#
-#   'reduce_ica_components' (VARIANT B): keeps the current step order
-#       (interpolate first), but shrinks N_ICA_COMPONENTS for that specific
-#       block by the number of interpolated channels, so ICA is never asked
-#       for more independent components than the (now rank-reduced) data can
-#       support. Smaller change, same step order, same set of channels used
-#       throughout - but the number of ICA components differs between blocks
-#       with different numbers of bad channels.
+# Options: 'ica_before_interpolate' (used here), 'interpolate_before_ica'
+# (other approach), 'reduce_ica_components' (alternative fix, shrinks
+# N_ICA_COMPONENTS per block instead of reordering the steps).
 ICA_STRATEGY = 'ica_before_interpolate'
 
 MIN_ICA_COMPONENTS = 8  
@@ -190,39 +169,16 @@ TRIGGER_CODES_INT = {
 }
 
 # ---------------------------------------------------------------------------
-# 6a. AUTOMATIC EXCLUSION OF BAD RECORDINGS (based on 00a_raw_noise_check.py)
+# 6a. Automatic exclusion of bad recordings (00a_raw_noise_check.py)
 # ---------------------------------------------------------------------------
-# Thresholds used by 00b_flag_bad_recordings.py to decide which
-# participant/block recordings are hard-excluded from all downstream
-# analysis (01_preprocessing.py onwards). Decided on 2026-08-11 after
-# inspecting results/tables/raw_noise_check.csv: two recordings (P04-B,
-# P18-C) showed clear signs of a broken/saturated channel or a massive
-# artefact (signal power 4-5 orders of magnitude above the rest of the
-# sample; near-identical RMS across quarters for P18-C, consistent with
-# clipping). These thresholds are intentionally conservative (large
-# margins relative to the anomalies actually observed) so that ordinary
-# between-participant variability is not mistaken for a broken recording.
+# Thresholds used by 00b_flag_bad_recordings.py to hard-exclude broken
+# recordings before preprocessing. Two recordings (P04-B, P18-C) showed
+# clear signs of a broken/saturated channel; thresholds below are set
+# conservatively so normal between-participant variability isn't flagged.
 
-# (a) Noise/RMS clearly rising over the course of the recording
-#     (e.g. discharging power source, degrading electrode contact).
-RISING_NOISE_RMS_RATIO_THRESHOLD = 2.0   # rms_last_vs_first_ratio
-
-# (b) Recording-level signal power that is a robust outlier relative to
-#     the rest of the sample (log10 scale, MAD-based z-score) - catches
-#     saturation, gross artefacts, or a broken channel dominating the
-#     average.
-SIGNAL_POWER_ROBUST_Z_THRESHOLD = 5.0    # |z| on log10(signal_band_power_1_30hz)
-
-# (c) Flat/near-identical RMS across the last three quarters of the
-#     recording - a signature of a clipped/saturated signal rather than
-#     genuine (always-fluctuating) EEG. NOTE: genuinely stable/healthy EEG
-#     already has a fairly low relative std here (observed range ~2.5e-4
-#     to ~3.8e-2 across the full sample); only values many orders of
-#     magnitude below that floor (i.e. quarters that are bit-for-bit or
-#     near bit-for-bit identical, consistent with a railed/saturated ADC)
-#     should be flagged. A threshold inside the normal range would flag
-#     most of the sample and is not a meaningful clipping detector.
-FLAT_RMS_REL_STD_THRESHOLD = 1e-6        # std(rms_q2,q3,q4) / mean(rms_q2,q3,q4)
+RISING_NOISE_RMS_RATIO_THRESHOLD = 2.0   # rms_last_vs_first_ratio; catches rising noise over the recording
+SIGNAL_POWER_ROBUST_Z_THRESHOLD = 5.0    # MAD-based |z| on log10 signal power; catches saturation/outlier channels
+FLAT_RMS_REL_STD_THRESHOLD = 1e-6        # rel. std of RMS across last 3 quarters; near-zero indicates clipping
 
 EXCLUDED_RECORDINGS_PATH = STATS_PATH / 'excluded_recordings.csv'
 
@@ -268,16 +224,9 @@ def ensure_output_dirs() -> None:
 _EXCLUDED_RECORDINGS_CACHE = None  # module-level cache; loaded once per run
 
 def load_excluded_recordings() -> frozenset:
-    """
-    Loads the (participant, block) pairs flagged for hard exclusion by
-    00b_flag_bad_recordings.py from EXCLUDED_RECORDINGS_PATH.
-
-    Returns an empty frozenset (with a warning) if the file does not yet
-    exist, e.g. because 00a_raw_noise_check.py / 00b_flag_bad_recordings.py
-    have not been run - this keeps every downstream script runnable on
-    its own without silently crashing, at the cost of not excluding
-    anything until the flagging step has actually been run.
-    """
+    """Loads (participant, block) pairs flagged for exclusion by
+    00b_flag_bad_recordings.py. Returns an empty set if that script
+    hasn't been run yet, so downstream scripts don't crash."""
     global _EXCLUDED_RECORDINGS_CACHE
     if _EXCLUDED_RECORDINGS_CACHE is not None:
         return _EXCLUDED_RECORDINGS_CACHE
@@ -307,10 +256,8 @@ def is_excluded(participant_id: str, block: str) -> bool:
 # 8. QUICK TEST
 # ---------------------------------------------------------------------------
 if __name__ == '__main__':
-    print("=== Verifying config.py ===\n")
     print(f"SYSTEM_DELAY = {SYSTEM_DELAY*1000:.3f} ms")
     print(f"LEAD_IN = {LEAD_IN}")
     print(f"EXCLUDE_PRE_DEVIANT_STANDARDS = {EXCLUDE_PRE_DEVIANT_STANDARDS}")
-    print("\nTRIGGER_OFFSETS (total delay per trigger code):")
     for code, offset in sorted(TRIGGER_OFFSETS.items()):
-        print(f"  code {code:2d} -> {offset*1000:.3f} ms")
+        print(f"code {code}: {offset*1000:.3f} ms")

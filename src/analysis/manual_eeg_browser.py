@@ -44,20 +44,11 @@ mne.set_log_level('WARNING')
 
 
 def _sphere_covering_all_channels(info: mne.Info, margin: float = 1.03) -> tuple:
-    """
-    Returns an explicit (x, y, z, radius) sphere for plot_topomap's `sphere`
-    argument, sized to cover the single most eccentric channel rather than
-    MNE's default 'auto' fit (which sizes the head outline to the bulk of
-    the montage and can leave low/lateral channels -- e.g. FT9/FT10/TP9/TP10
-    in this 32-ch CLACS layout mapped onto standard_1020 -- poking outside
-    the drawn head circle).
-
-    NOTE: purely cosmetic/plotting concern -- does not affect processed
-    data or any other analysis. Electrode positions used throughout the
-    pipeline come from raw.set_montage() in 01_preprocessing.py; this only
-    controls how big a circle is drawn around those positions when
-    rendering a topomap. Same fix as in 02_erp_analysis.py.
-    """
+    """Explicit (x, y, z, radius) sphere for plot_topomap's `sphere`
+    argument, sized to cover the most eccentric channel (default
+    sphere='auto' can leave FT9/FT10/TP9/TP10 outside the drawn head
+    circle on this 32-ch montage). Purely cosmetic - doesn't affect
+    data or analysis. Same fix as in 02_erp_analysis.py."""
     pos = np.array([ch['loc'][:3] for ch in info['chs'] if ch['kind'] == 2])  # FIFFV_EEG_CH
     center_xy = pos[:, :2].mean(axis=0)
     radii = np.sqrt(((pos[:, :2] - center_xy) ** 2).sum(axis=1))
@@ -65,9 +56,7 @@ def _sphere_covering_all_channels(info: mne.Info, margin: float = 1.03) -> tuple
     return (float(center_xy[0]), float(center_xy[1]), 0.0, r)
 
 
-# =============================================================================
-# HELPER FUNCTIONS (reused from preprocessing pipeline)
-# =============================================================================
+# --- Helper functions (reused from preprocessing pipeline) ---
 
 def _read_internal_filenames(vhdr_path: Path) -> dict:
     """Read .vhdr file and extract internal DataFile= and MarkerFile= names."""
@@ -209,9 +198,7 @@ def apply_basic_preprocessing(raw: mne.io.Raw) -> mne.io.Raw:
     return raw
 
 
-# =============================================================================
-# MAIN BROWSER FUNCTIONS
-# =============================================================================
+# --- Main browser functions ---
 
 def browse_raw(participant_id: str, block: str, preprocess: bool = True):
     """
@@ -230,20 +217,17 @@ def browse_raw(participant_id: str, block: str, preprocess: bool = True):
     if preprocess:
         raw = apply_basic_preprocessing(raw)
 
-    # Print basic info
     print(f"\n  Data info:")
     print(f"    Channels: {raw.info['nchan']}")
     print(f"    Duration: {raw.times[-1]:.1f} s")
     print(f"    Sampling: {raw.info['sfreq']} Hz")
 
-    # Get events
     events, event_id = mne.events_from_annotations(raw)
     print(f"    Events:   {len(events)}")
     for name, code in event_id.items():
         count = np.sum(events[:, 2] == code)
         print(f"      {name}: {count}")
 
-    # Interactive browser
     print("\n  Opening raw browser...")
     print("  Keyboard shortcuts:")
     print("    'b' – mark bad segment")
@@ -280,7 +264,6 @@ def browse_epochs(participant_id: str, block: str, condition: str = 'dev'):
     print(f"    Time:     {epochs.tmin:.1f} – {epochs.tmax:.1f} s")
     print(f"    Channels: {len(epochs.ch_names)}")
 
-    # Plot epochs
     print("\n  Opening epochs browser...")
     print("  Click on an epoch to mark it as bad.")
     print("  Press 'd' to drop all marked epochs.")
@@ -332,7 +315,6 @@ def browse_ica(participant_id: str, block: str, random_state: int = cfg.RANDOM_S
             print(f"  ✗ ICA fallback also failed: {e2}")
             return
 
-    # Show ICA components
     print("\n  Opening ICA component browser...")
     print("  Click on a component to toggle selection.")
     print("  Components selected for removal will be highlighted.")
@@ -341,7 +323,6 @@ def browse_ica(participant_id: str, block: str, random_state: int = cfg.RANDOM_S
 
     ica.plot_components(show=True)
 
-    # Show ICA sources (time series of components)
     print("\n  Opening ICA sources browser (first 15 components)...")
     print("  This shows the time course of each ICA component.")
     print("  Look for components that show eye blinks, heartbeats, or muscle artifacts.")
@@ -356,7 +337,6 @@ def browse_ica(participant_id: str, block: str, random_state: int = cfg.RANDOM_S
         title=f"{participant_id} Block {block} – ICA Sources",
     )
 
-    # Show overlay of EOG-like components
     print("\n  Looking for EOG components...")
     try:
         eog_proxy = next((ch for ch in ['Fp1', 'Fp2'] if ch in raw.ch_names), None)
@@ -368,7 +348,6 @@ def browse_ica(participant_id: str, block: str, random_state: int = cfg.RANDOM_S
     except Exception as e:
         print(f"  EOG detection error: {e}")
 
-    # Show overlay for ECG if any
     try:
         # Look for heartbeat via frontal channels
         ecg_channels = [ch for ch in ['ECG', 'EKG', 'Fp1', 'Fp2'] if ch in raw.ch_names]
@@ -405,7 +384,6 @@ def browse_psd(participant_id: str, block: str):
 
     raw = apply_basic_preprocessing(raw)
 
-    # Plot PSD
     print("  Plotting power spectrum...")
     raw.plot_psd(
         fmin=0.1,
@@ -416,7 +394,6 @@ def browse_psd(participant_id: str, block: str):
         title=f"{participant_id} Block {block} – Power Spectrum",
     )
 
-    # Plot PSD with topomap
     print("  Plotting power spectrum topomap (1–30 Hz)...")
     raw.plot_psd_topo(
         fmin=1,
@@ -441,11 +418,9 @@ def browse_comparison(participant_id: str, block: str):
         print("  Cannot load both conditions.")
         return
 
-    # Compute ERPs
     evoked_std = epochs_std.average()
     evoked_dev = epochs_dev.average()
 
-    # Plot overlay
     print("  Plotting standard vs deviant ERPs...")
     mne.viz.plot_evoked_overlay(
         [evoked_std, evoked_dev],
@@ -454,7 +429,6 @@ def browse_comparison(participant_id: str, block: str):
         title=f"{participant_id} Block {block} – Standard vs Deviant",
     )
 
-    # Plot difference wave (MMN)
     print("  Plotting difference wave (deviant - standard)...")
     evoked_diff = mne.combine_evoked([evoked_dev, evoked_std], weights=[1, -1])
     evoked_diff.plot(
@@ -463,7 +437,6 @@ def browse_comparison(participant_id: str, block: str):
         title=f"{participant_id} Block {block} – Difference (Dev - Std)",
     )
 
-    # Plot butterfly of difference
     evoked_diff.plot_joint(
         picks=['Fz'],
         show=True,
@@ -485,7 +458,6 @@ def browse_topo(participant_id: str, block: str):
 
     evoked = epochs_dev.average()
 
-    # MMN window
     t_mmn = (cfg.MMN_TMIN + cfg.MMN_TMAX) / 2
     print(f"  Topomap at MMN window ({cfg.MMN_TMIN*1000:.0f}–{cfg.MMN_TMAX*1000:.0f} ms)...")
     evoked.plot_topomap(
@@ -497,7 +469,6 @@ def browse_topo(participant_id: str, block: str):
         title=f"{participant_id} Block {block} – Deviant ERP at {t_mmn*1000:.0f} ms",
     )
 
-    # P3a window
     t_p3a = (cfg.P3A_TMIN + cfg.P3A_TMAX) / 2
     print(f"  Topomap at P3a window ({cfg.P3A_TMIN*1000:.0f}–{cfg.P3A_TMAX*1000:.0f} ms)...")
     evoked.plot_topomap(
@@ -509,7 +480,6 @@ def browse_topo(participant_id: str, block: str):
         title=f"{participant_id} Block {block} – Deviant ERP at {t_p3a*1000:.0f} ms",
     )
 
-    # Joint plot with topography
     evoked.plot_joint(
         picks=['Fz', 'Cz', 'Pz'],
         show=True,
@@ -530,7 +500,6 @@ def browse_grand_average():
     for block in ['A', 'B']:
         print(f"\n  Block {block}:")
 
-        # Collect deviant ERPs
         evokeds = []
         for p in participants:
             epochs = load_epochs_participant_block(p, block, 'dev')
@@ -544,14 +513,12 @@ def browse_grand_average():
         ga = mne.grand_average(evokeds)
         print(f"    Grand average from {len(evokeds)} participants")
 
-        # Plot grand average
         ga.plot(
             picks=['Fz', 'Cz'],
             show=True,
             title=f"Grand Average – Block {block} Deviant (N={len(evokeds)})",
         )
 
-        # Topomap at MMN window
         t_mmn = (cfg.MMN_TMIN + cfg.MMN_TMAX) / 2
         ga.plot_topomap(
             times=[t_mmn],
@@ -579,7 +546,6 @@ def browse_annotations(participant_id: str, block: str):
 
     raw = apply_basic_preprocessing(raw)
 
-    # Show annotations
     events, event_id = mne.events_from_annotations(raw)
 
     print("\n  Events found:")
@@ -587,7 +553,6 @@ def browse_annotations(participant_id: str, block: str):
         count = np.sum(events[:, 2] == code)
         print(f"    {name}: {count}")
 
-    # Plot with annotations highlighted
     raw.plot(
         n_channels=20,
         scalings='auto',
@@ -598,9 +563,7 @@ def browse_annotations(participant_id: str, block: str):
     )
 
 
-# =============================================================================
-# MAIN
-# =============================================================================
+# --- MAIN ---
 
 def main():
     parser = argparse.ArgumentParser(
@@ -699,28 +662,20 @@ def main():
         print(f"  RUNNING ALL BROWSING MODES: {participant}, Block {block}")
         print(f"{'#'*60}")
 
-        # Raw data
         browse_raw(participant, block, preprocess=not args.raw_only)
 
-        # Epochs (deviant)
         browse_epochs(participant, block, 'dev')
 
-        # Epochs (standard)
         browse_epochs(participant, block, 'std')
 
-        # ICA
         browse_ica(participant, block, args.ica_rs)
 
-        # PSD
         browse_psd(participant, block)
 
-        # Comparison
         browse_comparison(participant, block)
 
-        # Topo
         browse_topo(participant, block)
 
-        # Annotations
         browse_annotations(participant, block)
 
         print(f"\n{'#'*60}")

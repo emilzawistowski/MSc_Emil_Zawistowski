@@ -1,72 +1,8 @@
-# =============================================================================
+# CSP + LDA decoding of looming vs. receding deviants, 
+# leave-one-subject-out cross-validation, with a label-shuffling
+# permutation test and a secondary windowed (time-resolved) analysis.
 #
-# GOAL
-# ----
-# This is the PRIMARY, pre-registered test of Hypothesis 4 (sec:h4 /
-# sec:results_h4 in the thesis), which explicitly specifies:
-#   "This discriminability will be tested using a classification pipeline
-#    employing Common Spatial Patterns (CSP) and Linear Discriminant
-#    Analysis (LDA). Using leave-one-subject-out validation, it is
-#    predicted that the model will achieve a decoding accuracy for
-#    Near vs. Far deviants that significantly exceeds the 50% chance
-#    level. The robustness of this classification will be validated
-#    through a permutation test with alpha = 0.05..."
-#
-# This differs from 04_decoding.py (SVM, within-subject 5-fold
-# StratifiedKFold, ROC-AUC, sliding time window) in three ways that
-# matter for what each script can claim:
-#
-#   1. Feature extraction : CSP spatial filters (this script) vs. raw
-#      per-timepoint channel amplitudes (04_decoding.py).
-#   2. Cross-validation    : leave-one-subject-out, i.e. the classifier
-#      is trained on N-1 participants and tested on the held-out
-#      participant (this script) vs. within-subject 5-fold CV, i.e.
-#      each participant's own trials are split into folds and averaged
-#      into a per-participant score, only pooled across people
-#      afterwards for group statistics (04_decoding.py).
-#   3. Question answered   : "Is there a distance-specific neural code
-#      that GENERALISES ACROSS PARTICIPANTS?" (this script, LOSO) vs.
-#      "Is the near/far pattern separable WITHIN each participant's
-#      own trials?" (04_decoding.py, within-subject).
-#
-# Both are legitimate, complementary analyses; this script is the one
-# that matches the pre-registered Methods text and should be reported
-# as the confirmatory test of H4. 04_decoding.py should be reframed in
-# the thesis as a supplementary/exploratory sensitivity analysis.
-#
-# CSP is fit on a single (or a small number of) time window(s) rather
-# than at every sliding time point, because CSP requires a fixed
-# spatial covariance estimated over a window of samples (it is not a
-# per-timepoint sliding method the way SlidingEstimator is). Two
-# variants are computed:
-#   (a) "windowed"     : one CSP+LDA model per fixed sub-window,
-#                        stepped across the MMN latency window
-#                        (100-280 ms), giving a time-resolved LOSO
-#                        accuracy curve broadly comparable in spirit
-#                        to the SlidingEstimator figure from
-#                        04_decoding.py.
-#   (b) "single-window" : one CSP+LDA model fit on the full
-#                        pre-registered MMN latency window
-#                        (100-280 ms) as a single feature block - this
-#                        is the primary, single-number confirmatory
-#                        test referred to in the Methods text ("a
-#                        decoding accuracy ... that significantly
-#                        exceeds the 50% chance level").
-#
-# USAGE
-# -----
-#   python 04b_decoding_csp_lda.py
-#   python 04b_decoding_csp_lda.py --participants P01 P02 P03
-#   python 04b_decoding_csp_lda.py --n-permutations 1000
-#
-# OUTPUT
-# ------
-#   results/tables/decoding_csp_lda/loso_fold_results.json
-#   results/tables/decoding_csp_lda/loso_summary.json
-#   results/tables/decoding_csp_lda/windowed_loso_scores.npy
-#   results/figures/decoding/csp_lda_loso_timecourse.png
-#   results/figures/decoding/csp_patterns_topomap.png
-# =============================================================================
+# Usage: python 04b_decoding_csp_lda.py [--participants ...] [--n-permutations N]
 
 import sys
 import json
@@ -94,9 +30,7 @@ import config as cfg
 mne.set_log_level('WARNING')
 
 
-# =============================================================================
-# 0. DECODING-SPECIFIC PARAMETERS
-# =============================================================================
+# --- 0. DECODING-SPECIFIC PARAMETERS ---
 
 CLASS_A_LABEL = 'looming'     # Block A deviant  (S 12, 2 m / near)
 CLASS_B_LABEL = 'receding'    # Block B deviant  (S 22, 5 m / far)
@@ -112,7 +46,7 @@ DECODE_TMAX = cfg.MMN_LATENCY_TMAX   # 0.280 s
 WINDOW_LENGTH = 0.050   # s   - 50 ms sub-windows
 WINDOW_STEP   = 0.020   # s   - 20 ms step
 
-N_CSP_COMPONENTS = cfg.N_CSP_COMPONENTS   # 6, from config.py
+N_CSP_COMPONENTS = cfg.N_CSP_COMPONENTS   # from config.py
 N_PERMUTATIONS   = 1000                   # overridden by --n-permutations
 RANDOM_STATE     = cfg.RANDOM_STATE
 CHANCE_LEVEL     = 0.5
@@ -123,9 +57,7 @@ DECODING_TABLE_PATH  = cfg.STATS_PATH / 'decoding_csp_lda'
 DECODING_FIGURE_PATH = cfg.FIGURES_DECODING_PATH
 
 
-# =============================================================================
-# 1. HELPERS
-# =============================================================================
+# --- 1. HELPERS ---
 
 def _to_python(obj):
     """Recursively convert numpy scalars/arrays to built-in Python types."""
@@ -274,26 +206,15 @@ def build_group_arrays(all_epochs: dict, tmin: float, tmax: float):
     return X, y, groups, pid_list
 
 
-# =============================================================================
-# 2. LOSO CSP+LDA CORE
-# =============================================================================
+# --- 2. LOSO CSP+LDA CORE ---
 
 def run_loso_csp_lda(X: np.ndarray, y: np.ndarray, groups: np.ndarray,
                       n_csp: int = N_CSP_COMPONENTS) -> dict:
-    """
-    Fit CSP+LDA with leave-one-subject-out cross-validation.
-
-    For each held-out participant: CSP spatial filters and the LDA
-    classifier are fit ONLY on the remaining N-1 participants' trials,
-    then applied unchanged to the held-out participant's trials. This
-    is the correct way to avoid leaking held-out-participant
-    information into the spatial filters themselves, which a naive
-    "fit CSP on everyone, then cross-validate the classifier only"
-    approach would not guarantee.
-
-    Returns a dict with per-fold accuracy/AUC and the pooled
-    (all-held-out-trials) accuracy/AUC.
-    """
+    """Fit CSP+LDA with leave-one-subject-out cross-validation. CSP filters
+    and the LDA classifier are fit only on the N-1 training participants
+    and applied unchanged to the held-out participant, to avoid leaking
+    held-out information into the spatial filters. Returns per-fold and
+    pooled accuracy/AUC."""
     logo = LeaveOneGroupOut()
     fold_results = []
     y_true_pooled, y_pred_pooled, y_score_pooled = [], [], []
@@ -375,26 +296,18 @@ def run_loso_csp_lda(X: np.ndarray, y: np.ndarray, groups: np.ndarray,
     }
 
 
-# =============================================================================
-# 3. PERMUTATION TEST (label-shuffling within participant, LOSO refit)
-# =============================================================================
+# --- 3. PERMUTATION TEST (label-shuffling within participant, LOSO refit) ---
 
 def permutation_test_loso(X: np.ndarray, y: np.ndarray, groups: np.ndarray,
                            observed_accuracy: float,
                            n_permutations: int = N_PERMUTATIONS,
                            n_csp: int = N_CSP_COMPONENTS,
                            seed: int = RANDOM_STATE) -> dict:
-    """
-    Permutation test for the pooled LOSO accuracy: shuffle class labels
-    WITHIN each participant (preserving each participant's class
-    balance and the group structure) and rerun the full LOSO CSP+LDA
-    pipeline, n_permutations times. Because a full CSP refit per fold
-    per permutation is expensive, this loop refits CSP+LDA on each
-    LOSO fold within every permutation, exactly mirroring the
-    procedure used to obtain the observed statistic (a shortcut such
-    as permuting only the LDA stage would not test the full pipeline,
-    including CSP, that the observed accuracy is based on).
-    """
+    """Permutation test for the pooled LOSO accuracy: shuffle class labels
+    within each participant (preserving class balance and group structure)
+    and rerun the full LOSO CSP+LDA pipeline, n_permutations times. Refits
+    CSP+LDA per fold per permutation to mirror the procedure used for the
+    observed statistic (permuting only the LDA stage would not test CSP)."""
     rng = np.random.default_rng(seed)
     unique_groups = np.unique(groups)
     perm_accuracies = np.zeros(n_permutations)
@@ -447,18 +360,13 @@ def permutation_test_loso(X: np.ndarray, y: np.ndarray, groups: np.ndarray,
     }
 
 
-# =============================================================================
-# 4. TIME-RESOLVED (WINDOWED) LOSO ANALYSIS
-# =============================================================================
+# --- 4. TIME-RESOLVED (WINDOWED) LOSO ANALYSIS ---
 
 def run_windowed_loso(all_epochs: dict, n_csp: int = N_CSP_COMPONENTS) -> dict:
-    """
-    Step a fixed-length window across [DECODE_TMIN, DECODE_TMAX] and run
-    LOSO CSP+LDA (accuracy only, no permutation test - that is reserved
-    for the single confirmatory window to keep runtime tractable) in
-    each window, to produce a time-resolved curve comparable in spirit
-    to the SlidingEstimator figure in 04_decoding.py.
-    """
+    """Step a fixed-length window across [DECODE_TMIN, DECODE_TMAX] and run
+    LOSO CSP+LDA (accuracy only, no permutation test) in each window, for
+    a time-resolved curve comparable to the SlidingEstimator figure in
+    04_decoding.py."""
     window_starts = np.arange(DECODE_TMIN, DECODE_TMAX - WINDOW_LENGTH + 1e-9,
                                WINDOW_STEP)
     window_centers = window_starts + WINDOW_LENGTH / 2
@@ -486,9 +394,7 @@ def run_windowed_loso(all_epochs: dict, n_csp: int = N_CSP_COMPONENTS) -> dict:
     }
 
 
-# =============================================================================
-# 5. VISUALISATION
-# =============================================================================
+# --- 5. VISUALISATION ---
 
 def plot_windowed_loso(windowed: dict, primary_result: dict, out_path: Path) -> None:
     times_ms = windowed['window_centers_s'] * 1000
@@ -525,21 +431,11 @@ def plot_windowed_loso(windowed: dict, primary_result: dict, out_path: Path) -> 
 
 
 def _sphere_covering_all_channels(info: mne.Info, margin: float = 1.03) -> tuple:
-    """
-    Returns an explicit (x, y, z, radius) sphere for plot_patterns'/
-    plot_topomap's `sphere` argument, sized to cover the single most
-    eccentric channel rather than MNE's default 'auto' fit (which sizes
-    the head outline to the bulk of the montage and can leave low/lateral
-    channels -- e.g. FT9/FT10/TP9/TP10 in this 32-ch CLACS layout mapped
-    onto standard_1020 -- poking outside the drawn head circle).
-
-    NOTE: purely cosmetic/plotting concern -- does not affect processed
-    data, decoding results, or CSP components themselves. Electrode
-    positions used throughout the pipeline come from raw.set_montage()
-    in 01_preprocessing.py; this only controls how big a circle is drawn
-    around those positions when rendering a topomap PNG. Same fix as in
-    02_erp_analysis.py's plot_topomap_mmn()/plot_topomap_p3a().
-    """
+    """Explicit (x, y, z, radius) sphere for plot_patterns/plot_topomap,
+    sized to cover the most eccentric channel (default sphere='auto' can
+    leave FT9/FT10/TP9/TP10 outside the drawn head circle on this 32-ch
+    montage). Purely cosmetic - does not affect data or results. Same fix
+    as in 02_erp_analysis.py's topomaps."""
     pos = np.array([ch['loc'][:3] for ch in info['chs'] if ch['kind'] == 2])  # FIFFV_EEG_CH
     center_xy = pos[:, :2].mean(axis=0)
     radii = np.sqrt(((pos[:, :2] - center_xy) ** 2).sum(axis=1))
@@ -577,9 +473,7 @@ def plot_csp_patterns(all_epochs: dict, n_csp: int, out_path: Path) -> None:
               f"confirmatory statistic).")
 
 
-# =============================================================================
-# 6. MAIN PIPELINE
-# =============================================================================
+# --- 6. MAIN PIPELINE ---
 
 def run_decoding(participants: list[str], n_permutations: int, n_jobs: int = 1) -> None:
     DECODING_TABLE_PATH.mkdir(parents=True, exist_ok=True)
@@ -692,9 +586,7 @@ def run_decoding(participants: list[str], n_permutations: int, n_jobs: int = 1) 
     print("=" * 70)
 
 
-# =============================================================================
-# ENTRY POINT
-# =============================================================================
+# --- ENTRY POINT ---
 
 def main():
     parser = argparse.ArgumentParser(
