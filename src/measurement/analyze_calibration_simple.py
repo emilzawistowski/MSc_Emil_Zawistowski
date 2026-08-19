@@ -30,7 +30,7 @@ def main():
     data_all, fs = sf.read(WAV_PATH)   # (n_samples, n_channels), because sf.write(audio_mix.T, ...)
     print(f"File: {data_all.shape[0]} samples, {data_all.shape[1]} channels, fs={fs}\n")
 
-    # NOTE: We do NOT sort globally by t_target_s. This log contains events
+    # Keep the recorded session order; events are grouped below by run.
     # from 7 separate, repeated playback sessions of the same (deterministic)
     # calib_combined.wav file - in each session t_target_s resets to the same
     # pattern (1..19 s for 2 m, 24..42 s for 5 m). Global sorting by t_target_s
@@ -49,7 +49,7 @@ def main():
         subset = log[log['trigger_code'] == trig_code].reset_index(drop=True)
 
         # The log contains 7 repeated playback sessions of the same WAV file.
-        # We detect session boundaries by a drop in t_target_s (return to the beginning of the pattern),
+        # A drop in t_target_s marks the start of a new session.
         # and then in EACH session individually we skip the first and last trial
         # (t_target might be close to 0 or the sequence start has different scheduling dynamics).
         t = subset['t_target_s'].values
