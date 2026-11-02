@@ -55,6 +55,10 @@ There are also helper scripts in `src/analysis/` for exploratory diagnostics, in
 
 Raw EEG, processed epochs and the speech corpora are too big for GitHub and are listed in `.gitignore`. The repo ships the stimuli metadata, trigger logs and acoustic measurements needed to reproduce the analysis outputs. If you need the full dataset, get in touch.
 
+## Note on Bayes factors
+
+The thesis PDF (tag `v1.0-thesis`) reports Bayes factors computed with an error in the JZS integration. This version fixes it; corrected values are in `results/tables/results_ieee_format.txt`. Frequentist results are unchanged.
+
 ---
 
 Emil Zawistowski

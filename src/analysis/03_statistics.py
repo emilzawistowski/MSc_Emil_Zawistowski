@@ -53,16 +53,18 @@ def jzs_bayes_factor(t: float, n: int, r_scale: float = 0.5) -> float:
     if n < 2:
         return np.nan
     df = n - 1
+    r2 = r_scale**2
 
     def integrand(g):
-        term1 = (1 + n * g) ** (-0.5)
-        term2 = (1 + t**2 / ((1 + n * g) * df)) ** (-n / 2)
-        prior = (0.5**0.5) / np.sqrt(np.pi) * g ** (-1.5) * np.exp(-1 / (2 * g))
+        term1 = (1 + n * g * r2) ** (-0.5)
+        term2 = (1 + t**2 / ((1 + n * g * r2) * df)) ** (-(df + 1) / 2)
+        prior = (2 * np.pi) ** (-0.5) * g ** (-1.5) * np.exp(-1 / (2 * g))
         return term1 * term2 * prior
 
     try:
-        result, _ = integrate.quad(integrand, 0, 1000, limit=1000)
-        return float(result)
+        marginal_h1, _ = integrate.quad(integrand, 0, np.inf, limit=1000)
+        likelihood_h0 = (1 + t**2 / df) ** (-(df + 1) / 2)
+        return float(marginal_h1 / likelihood_h0)
     except Exception:
         return np.nan
 
@@ -374,7 +376,7 @@ def generate_ieee_report(
         _format_ieee_ttest(
             r_amp.get("result"),
             diff_m,
-            r_amp.get("sd_A", np.nan),
+            (r_amp.get("result") or {}).get("sd", np.nan),
             "H2 – MMN_A vs MMN_B Amplitude (Fz)",
             note=f"MMN_A: M = {ma:.3f} µV, SD = {r_amp.get('sd_A', np.nan):.3f}; "
                  f"MMN_B: M = {mb:.3f} µV, SD = {r_amp.get('sd_B', np.nan):.3f}. "
@@ -389,7 +391,7 @@ def generate_ieee_report(
         _format_ieee_ttest(
             r_fal.get("result"),
             diff_fal,
-            r_fal.get("sd_A", np.nan),
+            (r_fal.get("result") or {}).get("sd", np.nan),
             "H2 – MMN_A vs MMN_B FAL (Fz)",
             note=f"FAL_A: M = {fa:.1f} ms, SD = {r_fal.get('sd_A', np.nan):.1f}; "
                  f"FAL_B: M = {fb:.1f} ms, SD = {r_fal.get('sd_B', np.nan):.1f}. "
@@ -430,7 +432,7 @@ def generate_ieee_report(
         "=" * 70,
         "INTERPRETATION NOTES:",
         f"  • BF10 > {getattr(config, 'BF10_THRESHOLD', 3.0)} → moderate evidence.",
-        "  • Bayesian tests use a Cauchy prior with scale r = 0.5, as pre-registered.",
+        "  • Bayesian tests use a two-sided JZS Bayes factor with a Cauchy prior (r = 0.5), as specified in advance.",
         "  • MMN results for Fz electrode, P3a for Cz (FCz unavailable in montage).",
         "=" * 70,
         "",

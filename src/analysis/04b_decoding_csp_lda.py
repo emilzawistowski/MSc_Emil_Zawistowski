@@ -35,7 +35,7 @@ mne.set_log_level('WARNING')
 CLASS_A_LABEL = 'looming'     # Block A deviant  (S 12, 2 m / near)
 CLASS_B_LABEL = 'receding'    # Block B deviant  (S 22, 5 m / far)
 
-# Primary confirmatory window: full pre-registered MMN latency window,
+# Primary confirmatory window: full pre-specified MMN latency window,
 # matching the Methods/Results text (100-280 ms).
 DECODE_TMIN = cfg.MMN_LATENCY_TMIN   # 0.100 s
 DECODE_TMAX = cfg.MMN_LATENCY_TMAX   # 0.280 s
@@ -480,7 +480,7 @@ def run_decoding(participants: list[str], n_permutations: int, n_jobs: int = 1) 
     DECODING_FIGURE_PATH.mkdir(parents=True, exist_ok=True)
 
     print("=" * 70)
-    print("  PRE-REGISTERED H4 TEST: CSP + LDA, leave-one-subject-out")
+    print("  PRE-SPECIFIED H4 TEST: CSP + LDA, leave-one-subject-out")
     print("  looming (Block A dev) vs. receding (Block B dev)")
     print(f"  Confirmatory window: {DECODE_TMIN*1000:.0f}-{DECODE_TMAX*1000:.0f} ms "
           f"| CSP components: {N_CSP_COMPONENTS} | permutations: {n_permutations}")
@@ -499,7 +499,7 @@ def run_decoding(participants: list[str], n_permutations: int, n_jobs: int = 1) 
 
     # --- Primary confirmatory analysis: single full MMN-latency window ---
     print("\n" + "-" * 70)
-    print("  PRIMARY ANALYSIS: single window, 100-280 ms (pre-registered)")
+    print("  PRIMARY ANALYSIS: single window, 100-280 ms (pre-specified)")
     print("-" * 70)
     X, y, groups, pid_list = build_group_arrays(all_epochs, DECODE_TMIN, DECODE_TMAX)
     print(f"  Total trials: {X.shape[0]} | channels: {X.shape[1]} | "
@@ -579,7 +579,7 @@ def run_decoding(participants: list[str], n_permutations: int, n_jobs: int = 1) 
 
     print("\n" + "=" * 70)
     print("  DONE.")
-    print(f"  H4 (pre-registered CSP+LDA/LOSO): pooled accuracy = "
+    print(f"  H4 (pre-specified CSP+LDA/LOSO): pooled accuracy = "
           f"{primary_result['pooled_accuracy']:.3f}, permutation p = "
           f"{perm_result['p_value']:.4f} -> "
           f"{'SUPPORTED' if perm_result['significant_at_05'] and primary_result['pooled_accuracy'] > CHANCE_LEVEL else 'NOT SUPPORTED'}")
@@ -590,7 +590,7 @@ def run_decoding(participants: list[str], n_permutations: int, n_jobs: int = 1) 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Pre-registered H4 test: CSP + LDA, leave-one-subject-out '
+        description='Pre-specified H4 test: CSP + LDA, leave-one-subject-out '
                      'decoding of looming vs. receding auditory distance deviants.'
     )
     parser.add_argument('--participants', nargs='+', default=cfg.PARTICIPANTS,
